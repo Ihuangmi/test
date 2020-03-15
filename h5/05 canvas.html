@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+</head>
+
+<body>
+    <!-- canvas 元素本身是没有绘图能力的。所有的绘制工作必须在 JavaScript 内部完成： -->
+    <canvas id="myCanvas" width="500" height="500" style="border: 1px solid red;"></canvas>
+    <br />
+    <br />
+    <br />
+
+    <img id="scream" src="img_the_scream.jpg" alt="The Scream" width="220" height="277">
+    <br />
+    <br />
+    <br />
+
+    <script>
+        var myCanvas = document.getElementById('myCanvas')
+        var ctx = myCanvas.getContext('2d')
+
+
+        // 绘制矩形：
+        // ctx.fillStyle = 'blue'
+        // ctx.fillRect(0, 0, 200, 200)   // 在画布上绘制 200x200 的矩形，从左上角开始 (0,0)
+
+
+        // 绘制线条：
+        ctx.moveTo(0, 0)
+        ctx.lineTo(100, 300)
+        ctx.stroke()
+
+
+        // 绘制圆
+        // context.arc(x, y, r, sAngle, eAngle, counterclockwise);
+        // 参数	描述
+        // x	圆的中心的 x 坐标。
+        // y	圆的中心的 y 坐标。
+        // r	圆的半径。
+        // sAngle	起始角，以弧度计。（弧的圆形的三点钟位置是 0 度）。
+        // eAngle	结束角，以弧度计。
+        // counterclockwise	可选。规定应该逆时针还是顺时针绘图。False = 顺时针，true = 逆时针。
+        ctx.beginPath()
+        ctx.arc(250, 250, 100, 0, 2 * Math.PI)
+        ctx.stroke()
+
+
+
+
+        // 绘制文字
+        // context.fillText(text,x,y,maxWidth);
+        // 参数	描述
+        // text	规定在画布上输出的文本。
+        // x	开始绘制文本的 x 坐标位置（相对于画布）。
+        // y	开始绘制文本的 y 坐标位置（相对于画布）。
+        // maxWidth	可选。允许的最大文本宽度，以像素计。
+        ctx.font = "30px Arial";
+        ctx.fillText("Hello 黄蜜", 100, 300);
+        ctx.strokeText("Hello World", 10, 50);
+
+
+
+
+
+        // // 创建渐变
+        var grd = ctx.createLinearGradient(0, 0, 200, 0);
+        grd.addColorStop(0, "red");
+        grd.addColorStop(1, "yellow");
+        // 填充渐变
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, 200, 50);
+
+
+
+
+        var img = document.getElementById("scream");
+
+        img.onload = function () {
+            ctx.drawImage(img, 0, 0);
+        } 
+    </script>
+</body>
+
+</html>

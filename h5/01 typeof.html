@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>typeof instanceof</title>
+    <link rel="stylesheet" href="fonts/iconfont.css">
+    
+</head>
+
+<body>
+    <span class="iconfont">&#xe644;</span>
+    <span class="iconfont">&#xe600;</span>
+    <span class="iconfont">&#xe604;</span>
+
+
+    <script>
+        var num = 1;
+        var str = 'asd';
+        var und = undefined;
+        var bool = true;
+
+        console.log(typeof (num))
+        console.log(typeof str)
+        console.log(typeof und)
+        console.log(typeof bool)
+
+
+
+
+
+        var a = [1, 2, 3];
+        var b = null;
+        var c = new Object();
+        var d = function () {
+            console.log("dd")
+        }
+        console.log(typeof (a))
+        console.log(typeof (b))
+        console.log(typeof (c))
+        console.log(typeof (d))
+
+
+        // 语法:
+        // object instanceof constructor  检测object是否为constructor的实例
+        // 参数:
+        // object 某个实例对象
+        // constructor 某个构造函数
+
+        var obj = new Object()
+        console.log(obj instanceof Object)
+        console.log(a instanceof Object)
+        console.log(b instanceof Object)
+        console.log(c instanceof Object)
+        console.log(d instanceof Object)
+
+
+
+
+    </script>
+</body>
+
+</html>

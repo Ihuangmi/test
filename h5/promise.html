@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+</head>
+<body>
+
+    <script>
+        const p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                const time = Date.now()
+                if(time % 2 == 0){
+                    resolve('成功，time=' + time)
+                } else {
+                    reject('失败, time=' + time)
+                }
+            }, 1000)
+        })
+
+        p.then(
+            value => { //onResolved
+                console.log(`成功的回调`, value);
+            },
+            reason => { //onRejected
+                console.log(`失败的回调`, onreareason);
+            }
+        )
+    </script>
+    
+</body>
+</html>

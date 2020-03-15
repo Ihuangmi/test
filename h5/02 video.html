@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 对于中文网页需要使用 <meta charset="utf-8"> 声明编码，否则会出现乱码。 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>video</title>
+</head>
+
+<body>
+    <!-- <video> 元素支持三种视频格式： MP4, WebM, 和 Ogg: -->
+    <!-- controls: 设置或返回音频/视频是否显示控件（比如播放/暂停等）-->
+    <video width="320" height="240" controls >
+        <source src="mov_bbb.mp4" type="video/mp4">
+    </video>
+    <br/>
+    <br/>
+    <video width="320" height="240"  id="video1">
+        <source src="movie.mp4" type="video/mp4">
+    </video>
+
+    <div>
+        <button onclick="palyPause()">播放/暂停</button>
+    </div>
+
+    <script>
+        var myVideo = document.getElementById("video1")
+        function palyPause(){
+            if(myVideo.paused)
+                myVideo.play()
+             else 
+                myVideo.pause()
+            
+        }
+    </script>
+
+</body>
+
+</html>
