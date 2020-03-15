@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script type="text/javascript">
+			(function(doc, win) {
+				var docEl = doc.documentElement,
+					resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+					recalc = function() {
+						var clientWidth = docEl.clientWidth;
+						if (!clientWidth) return;
+						if (clientWidth >= 640) {
+							docEl.style.fontSize = '100px';
+						} else {
+							docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+						}
+					};
+
+				if (!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+				doc.addEventListener('DOMContentLoaded', recalc, false);
+			})(document, window);
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/phone.css" />
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="header">
+				<a href="#">
+					<i class="iconfont icon-fangdajing"></i>
+				</a>
+				<span>发现</span>
+			</div>
+			<div class="logo">
+				<div class="logo-up">
+					<div class="logo-text">
+						<span>
+							<img src="img/ting.png" />
+						</span>
+						<div>
+							<p class="first">喜马拉雅 想听啥都有</p>
+							<p class="logo-t">要高音质，不好流量，离线听？</p>
+							<p class="logo-t">立即下载喜马拉雅APP</p>
+						</div>
+					</div>
+				</div>
+				<a class="logo-down">立即下载APP</a>
+			</div>
+			<div class="pic1">
+				<img src="img/small.jpg" />
+			</div>
+			<div class="section">
+
+				<ul>
+					<li class="fire">
+						<a href="">
+							<img src="img/fire.png" />
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<img src="img/book.png" />
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<img src="img/baby.png" />
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<img src="img/sanzi.png" />
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<img src="img/yinfu.png" />
+						</a>
+					</li>
+				</ul>
+				<ul>
+					<li class="fire">
+						<a href="">
+							<img src="img/ding.jpg" />
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<img src="img/love.png" />
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<img src="img/zhujian.jpg" />
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<img src="img/face1.png" />
+						</a>
+					</li>
+					<li>
+						<a href="">
+							<img src="img/more.png" />
+						</a>
+					</li>
+
+				</ul>
+			</div>
+			<div class="warpper">
+				<div class="head">
+					<div>
+						<i class="iconfont icon-renlianquzhong"></i>
+						<span>今日焦点</span>
+					</div>
+					<div>
+						<a href="" class="more">更多</a>
+						<i class="iconfont icon-gengduo-shuangjiantou"></i>
+					</div>
+				</div>
+				<div class="box">
+					<img src="img/love.png" />
+				</div>
+				<div class="box-text">
+					<ul class="list">
+						<li>
+							<a href="">
+								<p>挖掘机男孩年入百万，喜马汇聚了那些宝藏主播</p>
+								<img src="img/jj.jpg" />
+							</a>
+						</li>
+						<li>
+							<a href="">
+								<p>董卿倪萍：听听她们诠释“中国式优雅”</p>
+								<img src="img/kk.jpg" />
+							</a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="sec">
+				<a href="" class="a1">
+					<img src="img/diantai.png" />
+				</a>
+				<a href="" class="a2">
+					<img src="img/hot.png" />
+				</a>
+			</div>
+			<div class="head">
+				<div>
+					<i class="iconfont icon-renlianquzhong"></i>
+					<span>推荐专辑</span>
+				</div>
+				<div>
+					<a href="" class="more">更多</a>
+					<i class="iconfont icon-gengduo-shuangjiantou"></i>
+				</div>
+			</div>
+			<div class="music">
+				<ul class="music">
+					<li class="one">
+						<a href="">
+							<img src="img/large.jpg" />
+							<p>鲜快报</p>
+						</a>
+					</li>
+					<li class="one">
+						<a href="" />
+						<img src="img/e.jpg" />
+						<p>绑架者们又名《失控》，同名网剧</p>
+						</a>
+					</li>
+					<li class="one">
+						<a href="">
+							<img src="img/k.jpg" />
+							<p>抢婚成爱</p>
+						</a>
+					</li>
+					<li class="one">
+						<a href="">
+							<img src="img/rge.jpg" />
+							<p>《茅天道士系列之捉鬼天师》</p>
+						</a>
+
+					</li>
+				</ul>
+			</div>
+			<div class="head">
+				<div>
+					<i class="iconfont icon-renlianquzhong"></i>
+					<span>头条</span>
+				</div>
+				<div>
+					<a href="" class="more">更多</a>
+					<i class="iconfont icon-gengduo-shuangjiantou"></i>
+				</div>
+			</div>
+			<div class="list-found">
+				<ul class="list-found">
+					<li><a href="">
+							<img src="img/large.jpg" />
+							<p class="text-found">重磅！外地车“进京证”每年限办12</p>
+							<p class="number">
+								<i class="iconfont icon-play"></i>
+								<span>143198</span>
+							</p>
+						</a></li>
+					<li><a href="">
+							<img src="img/a.jpg" />
+							<p class="text-found">【News Online】俄罗斯世界杯开</p>
+							<p class="number">
+								<i class="iconfont icon-play"></i>
+								<span>85536</span>
+							</p>
+						</a></li>
+					<li><a href="">
+							<img src="img/b.jpg" />
+							<p class="text-found">今日谈:浙江丽水村民制作出20米</p>
+							<p class="number">
+								<i class="iconfont icon-play"></i>
+								<span>69724</span>
+							</p>
+						</a></li>
+					<li><a href="">
+							<img src="img/c.jpg" />
+							<p class="text-found">尴尬！警察不识马拉多纳！阻止球王</p>
+							<p class="number">
+								<i class="iconfont icon-play"></i>
+								<span>60459</span>
+							</p>
+
+						</a></li>
+					<li><a href="">
+							<img src="img/d.jpg" />
+							<p class="text-found">逝者禁止乘电梯？家属抬棺材走17</p>
+							<p class="number">
+								<i class="iconfont icon-play"></i>
+								<span>80219</span>
+							</p>
+
+						</a></li>
+					<li><a href="">
+							<img src="img/f.jpg" />
+							<p class="text-found">女童迪士尼撞八角形灯柱缝两针</p>
+							<p class="number">
+								<i class="iconfont icon-play"></i>
+								<span>606662</span>
+							</p>
+						</a></li>
+				</ul>
+			</div>
+			<div class="head">
+				<div>
+					<i class="iconfont icon-renlianquzhong"></i>
+					<span>娱乐</span>
+				</div>
+				<div>
+					<a href="" class="more">更多</a>
+					<i class="iconfont icon-gengduo-shuangjiantou"></i>
+				</div>
+			</div>
+			<div class="list-found">
+				<ul class="list-found">
+					<li><a href="">
+							<img src="img/large.jpg" />
+							<p class="text-found">重磅！外地车“进京证”每年限办12</p>
+							<p class="number">
+								<i class="iconfont icon-play"></i>
+								<span>143198</span>
+							</p>
+						</a></li>
+					<li><a href="">
+							<img src="img/a.jpg" />
+							<p class="text-found">【News Online】俄罗斯世界杯开</p>
+							<p class="number">
+								<i class="iconfont icon-play"></i>
+								<span>85536</span>
+							</p>
+						</a></li>
+					<li><a href="">
+							<img src="img/b.jpg" />
+							<p class="text-found">今日谈:浙江丽水村民制作出20米</p>
+							<p class="number">
+								<i class="iconfont icon-play"></i>
+								<span>69724</span>
+							</p>
+						</a></li>
+					<li><a href="">
+							<img src="img/c.jpg" />
+							<p class="text-found">尴尬！警察不识马拉多纳！阻止球王</p>
+							<p class="number">
+								<i class="iconfont icon-play"></i>
+								<span>60459</span>
+							</p>
+
+						</a></li>
+					<li><a href="">
+							<img src="img/d.jpg" />
+							<p class="text-found">逝者禁止乘电梯？家属抬棺材走17</p>
+							<p class="number">
+								<i class="iconfont icon-play"></i>
+								<span>80219</span>
+							</p>
+
+						</a></li>
+					<li><a href="">
+							<img src="img/f.jpg" />
+							<p class="text-found">女童迪士尼撞八角形灯柱缝两针</p>
+							<p class="number">
+								<i class="iconfont icon-play"></i>
+								<span>606662</span>
+							</p>
+						</a></li>
+				</ul>
+			</div>
+			<div class="footer">
+				<p>版权所有：上海证大喜马拉雅网络科技有限公司
+					沪网文【2016】6034-453号 沪ICP备13027243号-3
+					公司地址：上海市闵行区紫星路588号2幢2062室
+				</p>
+				<a class="contract">联系我们</a>
+				<p>Copyright © 2014-2018 www.ximalaya.com lnc.ALL Rights Reserved</p>
+			</div>
+		</div>
+	</body>
+
+</html>
