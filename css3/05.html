@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3 文本效果</title>
+    <style>
+        h1 {
+            text-shadow: 5px 5px 5px #FF0000;
+            /* 指定了水平阴影，垂直阴影，模糊的距离，以及阴影的颜色 */
+
+        }
+
+        img {
+            /* width: 100%; */
+            border: 1px solid #8a4419;
+            /* border-style: inset; */
+        }
+
+        .box::after {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            /* hide shadow behind image */
+            -webkit-box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+            width: 70%;
+            left: 15%;
+            /* one half of the remaining 30% */
+            height: 100px;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>hellow</h1>
+
+    <div class="box">
+        <img src="03.jpg" alt="鲁迅" title="鲁迅先生">
+    </div>
+</body>
+
+</html>

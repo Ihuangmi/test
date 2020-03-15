@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按钮</title>
+    <style>
+        button{
+            width: 200px;
+            height: 80px;
+            color: wheat;
+            background-color: rgb(235, 109, 19);
+            border-radius: 10px;
+            text-align: center;
+            line-height: 80px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        button span{
+            position: relative;
+            transition: 0.5s;
+        }
+        button span::after{
+            content: '>>';
+            position: absolute;
+            opacity: 0;
+            transition: 0.5s;
+        }
+        button:hover span{
+            padding-right: 25px;
+        }
+        button:hover span::after{
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <button><span>按钮</span></button>
+</body>
+</html>

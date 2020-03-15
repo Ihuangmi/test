@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>块级元素垂直居中02</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 300px;
+            border: 1px solid red;
+            margin: 50px;
+            /*  */
+            position: relative;
+            /*  */
+        }
+        .content{
+            width: 100px;
+            height: 100px;
+            background-color: rgb(55, 194, 67);
+            /* 块级元素垂直居中02 */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            /*  */
+        }
+    </style>
+</head>
+<body>
+    <pre>
+        子元素绝对定位，top,left,right,bottom设为0，margin设为auto
+    </pre>
+    <div class="box">
+        <div class="content">02</div>
+    </div>
+</body>
+</html>

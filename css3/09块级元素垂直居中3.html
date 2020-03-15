@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>块级元素垂直居中03</title>
+    <style>
+        .box{
+            width: 300px;
+            height: 300px;
+            border: 1px solid red;
+            margin: 50px;
+            /*  */
+            position: relative;
+            /*  */
+        }
+        .content{
+            width: 100px;
+            height: 100px;
+            background-color: rgb(55, 194, 67);
+            /* 块级元素垂直居中03 */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+            /*  */
+        }
+    </style>
+</head>
+<body>
+    <pre>
+        子元素：
+        position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+    </pre>
+    <div class="box">
+        <div class="content">块级元素垂直居中03</div>
+    </div>
+</body>
+</html>

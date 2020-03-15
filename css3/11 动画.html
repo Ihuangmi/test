@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: burlywood;
+            position: relative;
+            /* animation: 所有动画属性的简写属性 */
+            /* animation: myfirst 2s; */
+            /* animation: myfirst 2s linear 2s infinite alternate; */
+            animation-name: myfirst;
+            animation-duration: 3s;
+            animation-timing-function: linear;
+            animation-delay: 2s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-play-state: running;
+        }
+
+        /* 当在 @keyframes 创建动画，把它绑定到一个选择器myfirst，否则动画不会有任何效果。 */
+        @keyframes myfirst {
+
+            /* from {background-color: red;}
+            to {background-color: blue;} */
+            0% {
+                background: red;
+                left: 0px;
+                top: 0px;
+            }
+
+            25% {
+                background: yellow;
+                left: 200px;
+                top: 0px;
+            }
+
+            50% {
+                background: blue;
+                left: 200px;
+                top: 200px;
+            }
+
+            75% {
+                background: green;
+                left: 0px;
+                top: 200px;
+            }
+
+            100% {
+                background: red;
+                left: 0px;
+                top: 0px;
+            }
+        }
+
+        /* img{
+            border: 1px solid rgb(90, 87, 87);
+            border-radius: 4px;
+            padding: 5px;
+        } */
+
+        img{
+            max-width: 100%;
+            height: auto;
+            /* opacity：图片的灰度 */
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div>hellow</div> -->
+
+    <!-- <img src="./imges/paris.jpg" > -->
+
+    <img src="./imges/trolltunga.jpg" >
+</body>
+
+</html>
