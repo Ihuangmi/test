@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        var arr = [3, 5, 2, 6, 7, 9]
+        function bubbleSort(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                // 优化代码（当数据已是排好序了，跳出外层循环）
+                var swap = false  //初始设置交换状态为false
+                for (var j = 0; j < arr.length - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        var tmp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = tmp
+                        swap = true  //交换过后设置交换状态为true
+                    }
+                }
+                if (!swap) {  //如果交换状态为false,跳出循环
+                    break;
+                }
+            }
+            console.log(arr)
+        }
+        bubbleSort(arr)
+
+    </script>
+
+</body>
+
+</html>
