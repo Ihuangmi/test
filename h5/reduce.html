@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reduce</title>
+</head>
+
+<body>
+    <p>65+44+12+4</p>
+    <button onclick="myFunction()">=</button>
+    <h1 id="demo"></h1>
+    <script>
+        var numbers = [65, 44, 12, 4];
+
+        function getSum(total, currentValue, currentIndex, arr) {
+            console.log(`total=`, total, `currentValue=`, currentValue, `currentIndex=`, currentIndex, `arr=`, arr)
+            return total + currentValue;
+        }
+        function myFunction(item) {
+            document.getElementById("demo").innerHTML = numbers.reduce(getSum);
+        } 
+    </script>
+</body>
+
+</html>
