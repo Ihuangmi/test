@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS层叠上下文、层叠等级、层叠顺序、z-index</title>
+    <style></style>
+  </head>
+  <body>
+    <!-- 首先，z-index这个属性并不是在所有的元素上都有效果。它仅仅只在 positioned 元素上有效果。
+要判断元素在 z轴 上的堆叠顺序，并不仅仅是直接比较两个元素的 z-index 值的大小，同时，这个堆叠顺序还由元素的层叠上下文和层叠等级共同决定。
+ -->
+    <img src="./imgs/1.png" alt="" />
+  </body>
+</html>

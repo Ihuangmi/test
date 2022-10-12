@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS实现水平垂直居中(未知宽高)</title>
+    <style>
+      .fa {
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+      }
+      /* .son {
+        width: 20px;
+        height: 20px;
+        background-color: tomato;
+      } */
+      /* 1、flex */
+      /* .fa {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      } */
+
+      /* 2、absolute + transform */
+      /* .fa {
+        position: relative;
+      }
+      .son {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      } */
+
+      /* 3、table */
+      .fa {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      /* 4、行内 line-height */
+      /* .fa {
+        line-height: 200px;
+        text-align: center;
+      }
+      .son {
+        display: inline-block;
+      } */
+
+      /* 5、grid */
+      /* .fa {
+        display: grid;
+      }
+      .son {
+        justify-self: center;
+        align-self: center;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- 未知元素宽高 -->
+    <div class="fa">
+      <div class="son">1234567</div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>input</title>
+  </head>
+
+  <body>
+    <p>text: <input type="text" placeholder="请输入..." /></p>
+    <p>
+      week:
+      <input
+        type="week"
+        name="week"
+        id="camp-week"
+        min="2022-W18"
+        max="2022-W26"
+        value="2022-W20"
+        required
+      />
+    </p>
+    <p>
+      time:
+      <input
+        type="time"
+        id="appt"
+        name="appt"
+        min="09:00"
+        max="18:00"
+        value="12:00"
+        required
+      />
+    </p>
+    <p>
+      number:
+      <input id="number" type="number" value="40" step="10" min="0" max="100" />
+    </p>
+    <p>
+      month:
+      <input
+        type="month"
+        id="start"
+        name="start"
+        min="2018-03"
+        value="2018-05"
+      />
+    </p>
+    <p>file: <input type="file" accept="image/*,.pdf" /></p>
+    <p>email: <input type="email" placeholder="请输入..." /></p>
+    <p>
+      datetime-local:
+      <input
+        type="datetime-local"
+        value="2018-06-12T19:30"
+        min="2018-06-07T00:00"
+        max="2018-06-14T00:00"
+      />
+    </p>
+    <p>
+      date:
+      <input type="date" value="2022-07-12" min="2022-06-01" max="2022-11-11" />
+    </p>
+    <p>color: <input type="color" value="#ff0000" /></p>
+    <p>button: <input type="button" value="按钮" /></p>
+
+    <p>radio:</p>
+    <fieldset>
+      <legend>Select a maintenance drone:</legend>
+      <!-- name相同为一组 -->
+      <div>
+        <input type="radio" id="huey" name="drone" value="huey" checked />
+        <label for="huey">Huey</label>
+      </div>
+
+      <div>
+        <input type="radio" id="dewey" name="drone" value="dewey" />
+        <label for="dewey">Dewey</label>
+      </div>
+
+      <div>
+        <input type="radio" id="louie" name="drone" value="louie" />
+        <label for="louie">Louie</label>
+      </div>
+    </fieldset>
+
+    <p>checkbox:</p>
+    <fieldset>
+      <p>
+        <input type="checkbox" id="cbox1" value="first_checkbox" />
+        <label for="cbox1">This is the first checkbox</label>
+      </p>
+      <p>
+        <input
+          type="checkbox"
+          id="cbox2"
+          value="second_checkbox"
+          checked="checked"
+        />
+        <label for="cbox2">This is the second checkbox, which is checked</label>
+      </p>
+    </fieldset>
+
+    <p>
+      checkbox: <input type="checkbox" checked />A <input type="checkbox" />B
+    </p>
+    <fieldset>
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" />
+      </div>
+
+      <div>
+        <label for="pass">Password (8 characters minimum):</label>
+        <input
+          type="password"
+          id="pass"
+          name="password"
+          minlength="8"
+          required
+        />
+      </div>
+
+      <input type="submit" value="Sign in" />
+    </fieldset>
+  </body>
+</html>

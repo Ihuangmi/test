@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #btnWrapper {
+        position: relative;
+        width: 380px;
+        height: 80px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        /* // 圆角 */
+        overflow: hidden;
+        /* // 超出隐藏 */
+        background-color: #e2e6eb;
+        /* // 背景色 */
+        box-shadow: -10px -10px 15px #f5f9fd, 10px 10px 15px #d8dbe5;
+        /* // 阴影（阴影可以添加多条，别告诉我你不知道！！） */
+      }
+      #btnWrapper::before {
+        content: "";
+        position: absolute;
+        left: 16px;
+        /* // 要考虑到父盒子的内边距 */
+        top: 12px;
+        /* // 同上 */
+        width: calc(50% - 16px - 8px);
+        height: calc(100% - 24px);
+        border-radius: 12px;
+        box-shadow: inset 8px 8px 6px #d9dce6, inset -5px -5px 15px #f5f9fd,
+          inset -5px -5px 15px #f5f9fd, inset 7px 7px 6px #d9dce6;
+
+        left: var(--groove-left);
+        /* // 使用css变量 */
+        /* ...其他属性 */
+        transition: left 1s cubic-bezier(0.82, 0.12, 0.18, 0.88);
+        /* // 添加过渡效果，贝塞尔曲线 */
+      }
+
+      .btn {
+        float: left;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+        padding: inherit;
+        /* // 偷懒内边距继承了父元素，也可以自己修改 */
+        color: #aaa;
+        cursor: pointer;
+      }
+      .active {
+        color: #111;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="btnWrapper">
+      <div class="btn active">按钮1</div>
+      <div class="btn">按钮2</div>
+    </div>
+  </body>
+</html>

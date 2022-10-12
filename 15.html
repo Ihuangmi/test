@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h1 span {
+        background: linear-gradient(to right, red, blue);
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+      ul :first-of-type {
+        color: red;
+      }
+
+      ul :last-of-type {
+        color: orange;
+      }
+
+      /* ol :nth-child(2) {
+        color: orange;
+      } */
+
+      /* ol :nth-child(2n) {
+        color: orange;
+      } */
+
+      /* ol :nth-child(even) {
+        color: orange;
+      } */
+
+      ol :nth-child(2n + 6) {
+        color: orange;
+      }
+
+      p:nth-of-type(2n) {
+        color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><span>前端简单说</span></h1>
+    <ul>
+      <li>
+        Lorem ipsum dolor sit amet. <span>Lorem ipsum dolor sit amet.</span>
+        <span>This text will be orange.</span>
+      </li>
+      <li>Lorem ipsum dolor sit amet.</li>
+      <li>This text will be orange.</li>
+    </ul>
+
+    <ol>
+      <li>Alpha</li>
+      <li>Beta</li>
+      <li>Gamma</li>
+      <li>Delta</li>
+      <li>Epsilon</li>
+      <li>Zeta</li>
+      <li>Eta</li>
+      <li>Theta</li>
+      <li>Iota</li>
+      <li>Kappa</li>
+    </ol>
+
+    <article>
+      <h1>Heading Goes Here</h1>
+      <p>Lorem ipsum dolor sit amet.</p>
+      <a href=""></a>
+      <p>This text will be orange.</p>
+      <p>3This text will be orange.</p>
+      <p>4This text will be orange.</p>
+    </article>
+  </body>
+</html>
