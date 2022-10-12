@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS filter 有哪些神奇用途</title>
+    <style>
+      /* filter: <filter-function> [<filter-function>]* | none
+      filter: url(file.svg#filter-element-id) */
+
+      /* blur()：模糊图像
+        brightness() ：让图像更明亮或更暗淡
+        contrast()：增加或减少图像的对比度
+        drop-shadow()：在图像后方应用投影
+        grayscale()：将图像转为灰度图
+        hue-rotate()：改变图像的整体色调
+        invert()：反转图像颜色
+        opacity()：改变图像透明度
+        saturate()：超饱和或去饱和输入的图像
+        sepia()：将图像转为棕褐色 */
+      body {
+        padding: 20px;
+      }
+
+      .gray {
+        filter: grayscale(100%);
+      }
+
+      h1 {
+        color: coral;
+      }
+
+      .box-shadow {
+        box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.5);
+      }
+      .drop-shadow {
+        filter: drop-shadow(1px 1px 15px rgba(0, 0, 0, 0.5));
+      }
+
+      .container {
+        margin: 40px;
+      }
+      .button {
+        padding: 0.5em 0.5em;
+        background: #e0e0e0;
+        border-radius: 3px;
+      }
+      .button.dark {
+        background: #333;
+      }
+      .button:hover:not(.disabled) {
+        cursor: pointer;
+        border-radius: 3px;
+        filter: brightness(110%) saturate(140%);
+      }
+      .button.disabled {
+        filter: grayscale(100%);
+      }
+
+      .glass-box {
+        display: flex;
+        /* justify-content: space-between; */
+        background-image: url("./0.webp");
+      }
+      .glass {
+        height: 500px;
+        width: 500px;
+        border: 1px groove #efefef;
+        border-radius: 12px;
+        background: rgba(242, 242, 242, 0.5);
+        box-shadow: 0 0.3px 0.7px rgba(0, 0, 0, 0.126),
+          0 0.9px 1.7px rgba(0, 0, 0, 0.179), 0 1.8px 3.5px rgba(0, 0, 0, 0.224),
+          0 3.7px 7.3px rgba(0, 0, 0, 0.277), 0 10px 20px rgba(0, 0, 0, 0.4);
+      }
+      .glass-by-filter {
+        z-index: 1;
+        box-sizing: border-box;
+        position: relative;
+      }
+      .glass-by-filter::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        background: inherit;
+        filter: blur(10px);
+      }
+      .glass-by-backdrop-filter {
+        backdrop-filter: blur(10px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gray">
+      <h1>置灰网页</h1>
+      <div>
+        <img class="box-shadow" src="/imgs/5.png" />
+        <img class="drop-shadow" src="/imgs/5.png" />
+      </div>
+    </div>
+
+    <h1>元素强调、高亮</h1>
+    <div class="container">
+      <a class="button">🍋</a>
+      <a class="button">🍎</a>
+      <a class="button">🍐</a>
+      <a class="button dark">🥑</a>
+      <a class="button dark">🍄</a>
+      <a class="button dark">🌽</a>
+      <a class="button disabled">🍒</a>
+      <a class="button disabled">🍅</a>
+      <a class="button disabled">🥔</a>
+    </div>
+
+    <h1>毛玻璃效果</h1>
+    <div class="glass-box">
+      <div class="glass glass-by-filter"></div>
+      <div class="glass glass-by-backdrop-filter"></div>
+    </div>
+  </body>
+</html>
