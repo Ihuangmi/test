@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- refresh 自动刷新并指向新页面（此功能常用于广告页面和登录自动调转页面） -->
+    <!-- <meta http-equiv="refresh" content="2;URL=https://www.hnucm.edu.cn/" /> -->
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>head标签详解</h1>
+    <pre>
+      meta标签共有两个属性，它们分别是 name属性和http-equiv属性， 不同的属性又有不同的参数值， 这些不同的参数值就实现了不同的网页功能。
+
+      1、name属性
+        name属性主要用于描述网页，与之对应的属性值为content，（两者搭配使用） content中的内容主要是便于搜索引擎机器人查找信息和分类信息用的。 
+        meta标签的name属性语法格式是：
+        <!-- <meta name="参数名称" content="具体的参数值 " >. -->
+
+        name属性下的参数:
+
+        keywords（关键字）
+        用来告诉搜索引擎网页的关键字是什么
+
+        description（描述）
+        用来告诉搜索引擎网页的内容
+        当我们用搜索引擎如百度，我们爬取到腾讯首页，百度会显示描述信息，这个信息其实就是获取的腾讯网页的description里的描述内容
+
+        robots（机器人向导）
+        用来告诉搜索引擎哪些界面需要索引，哪些界面不需要索引
+
+        author（作者）
+        用来标注网页的作者
+
+
+      2、http-equiv属性
+        http-equiv属性 相当于http的文件头作用，它可以向浏览器传回一些有用的信息，以帮助正确和精确地显示网页内容 与之对应的属性值为content，content中的内容其实就是各个参数的变量值。 
+        meta标签的http-equiv属性语法格式是：
+        <!-- <meta http-equiv="参数" content="参数变量值"> -->
+
+
+        refresh（刷新）
+        自动刷新并指向新页面（此功能常用于广告页面和登录自动调转页面）
+        <!-- <meta http-equiv="refresh" content="2;URL=新页面的网址"> -->
+
+        content-Type（显示字符集的设定）
+        设定用户使用的字符集
+        <!-- <meta http-equiv="content-Type" content="text/html" charset="gb2312"> -->
+
+
+    </pre>
+  </body>
+</html>

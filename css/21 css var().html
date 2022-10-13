@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      :root {
+        --size: 20px;
+      }
+      /*背景为红色————由于找不到变量，取后面的备用值*/
+      /* body {
+        background-color: var(--1, red);
+      } */
+      /*背景为transparent————变量值是不合法,用默认值*/
+      body {
+        background-color: var(--size, red);
+      }
+      /*变量的值可以修改*/
+      .box {
+        --columns: 4;
+        --margins: calc(24px / var(--columns));
+        --space: calc(4px * var(--columns));
+        --fontSize: calc(20px - 4 / var(--columns));
+      }
+      @media screen and (max-width: 1200px) {
+        .box {
+          --columns: 3;
+        }
+      }
+      @media screen and (max-width: 900px) {
+        .box {
+          --columns: 2;
+        }
+      }
+      @media screen and (max-width: 600px) {
+        .box {
+          --columns: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">box</div>
+  </body>
+</html>

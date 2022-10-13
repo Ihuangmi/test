@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        /* 当设置根元素的font-size为 62.5%时： 1 rem = 10px */
+        /* font-size: 62.5%; */
+      }
+      .box {
+        /* rem单位无论嵌套层级如何，都只相对于浏览器的根元素（HTML元素）的font-size */
+        width: 10rem;
+        height: 20rem;
+        background: #66ccff;
+      }
+
+      .parent {
+        font-size: 12px;
+      }
+      .child {
+        /* 1em指的是一个字体的大小，它会继承父级元素的字体大小 10em = 12*10px */
+        width: 10em;
+        height: 20em;
+        background: #f4aab9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">hello</div>
+
+    <div class="parent">
+      <div class="child">child</div>
+    </div>
+  </body>
+</html>
