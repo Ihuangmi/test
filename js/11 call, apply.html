@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>call, apply</title>
+</head>
+
+<body>
+  <script>
+    /*
+    * call apply用法基本相同，只是call可接收多个参数，apply接收一个数组参数
+    */
+    function Product(name, price) {
+      this.name = name;
+      this.price = price;
+    }
+
+    function Food(name, price) {
+      this.category = 'food';
+    }
+    function Food2(name, price) {
+      Product.call(this, name, price);
+      this.category = 'food';
+    }
+
+    console.log(new Food('cheese', 5)); // Food {category: 'food'}
+    console.log(new Food2('cheese', 5)); // Food2 {name: 'cheese', price: 5, category: 'food'}
+
+    var animals = [
+      { species: 'Lion', name: 'King' },
+      { species: 'Whale', name: 'Fail' }
+    ];
+    // 使用 call 方法调用匿名函数
+    for (var i = 0; i < animals.length; i++) {
+      (function (i) {
+        this.print = function () {
+          console.log('#' + i + ' ' + this.species
+            + ': ' + this.name);
+        }
+        this.print();
+      }).call(animals[i], i);
+    }
+
+
+// 在 ES5 中，始终坚持一个原则：this 永远指向调用它的那个对象
+    function myCall(obj, ...args){
+      obj.fn = this
+      return obj.fn(...args)
+    }
+    Function.prototype.myCall = myCall
+
+
+    function myApply(obj, array){
+      obj.fn = this
+      return obj.fn(array)
+    }
+    Function.prototype.myApply = myApply
+
+    const obj = {
+      name: 'hm'
+    }
+    function myName(...args){
+      console.log(this.name)
+      console.log(args)
+    }
+
+    myName.myCall(obj, 1,2,3)
+    myName.myApply(obj, [1,2,3])
+
+
+
+  </script>
+</body>
+
+</html>

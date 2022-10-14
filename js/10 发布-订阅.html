@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>发布-订阅模式</title>
+</head>
+
+<body>
+  <script>
+
+    class MyPublish {
+      constructor() {
+        this.myevent = new Map()
+      }
+      $on(eventName, cb) {
+        if (this.myevent.has(eventName)) {
+          let cbs = this.myevent.get(eventName)
+          if (Array.isArray(cbs)) {
+            cbs.push(cb)
+            this.myevent.set(eventName, cbs)
+          } else {
+            cbs = []
+          }
+        } else {
+          this.myevent.set(eventName, [cb])
+        }
+      }
+      $emit(eventName, data) {
+        if (this.myevent.has(eventName)) {
+          let cbs = this.myevent.get(eventName)
+          if (Array.isArray(cbs)) {
+            for (const cb of cbs) {
+              cb(data)
+            }
+          }
+        }
+      }
+    }
+    let PublishWatch = new MyPublish()
+    PublishWatch.$on('event1', (data) => {
+      console.log(data)
+    })
+    PublishWatch.$emit('event1', { a: 1, b: 2 })
+
+
+  </script>
+</body>
+
+</html>

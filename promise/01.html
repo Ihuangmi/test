@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实现一个Promise</title>
+</head>
+
+<body>
+  <div>
+    手动实现Promise
+  </div>
+
+
+  <script src="./01.js"></script>
+  <script>
+    new Promise((resolve, reject) => {
+      resolve('xxx')
+    }).then(res => {
+      console.log(res)
+    })
+
+    /*
+      Promise.race([promise1, promise2,...])：
+      数组中最先解决或最先拒绝的Promise，就执行相应后面的.then或者.catch。先以谁作为回调
+
+      Promise.all([promise1, promise2,...]):
+      如果所有都成功，则合成Promise的返回值就是所有子Promise的返回值数组。
+      如果有一个失败，那么第一个失败的会把自己的理由作为合成Promise的失败理由。
+    */
+    let promise1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('promise1')
+        // reject('出错了')
+      }, 1000)
+    })
+    let promise2 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        // resolve('promise2')
+        reject('失败了')
+      }, 2000)
+    })
+    Promise.all([promise1, promise2]).then(res => {
+      console.log(res)
+    }).catch(e => {
+      console.error(e)
+    })
+
+    Promise.race([promise1, promise2]).then(res => {
+      console.log(res)
+    }).catch(e => {
+      console.error(e)
+    })
+
+
+    // console.log('MyPromise:', MyPromise)
+
+    const test = new MyPromise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('"执行成功"')
+      }, 1000)
+    })
+    test.then(res => {
+      console.log(res)
+    })
+    test.then(res => {
+      console.log(res)
+    })
+
+  </script>
+</body>
+
+</html>

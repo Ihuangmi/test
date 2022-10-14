@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    .box {
+        display: flex;
+        height: 100vh;
+    }
+
+    .left {
+        height: 100vh;
+        width: 100px;
+        background-color: aqua;
+        order: 1;
+    }
+
+    .right {
+        width: 100px;
+        background-color: rgb(92, 139, 139);
+        order: 2;
+    }
+
+    .main {
+        flex: 1;
+        background-color: bisque;
+        order: 3;
+    }
+</style>
+
+<body>
+    <div class="box">
+        <div class="left"></div>
+        <div class="main"></div>
+        <div class="right"></div>
+    </div>
+    <script>
+        // / Given an object, then convert it to a new object structure
+        // For example:
+        const entry = {
+            a: {
+                b: {
+                    c: {
+                        dd: 'abcdd',
+                    },
+                },
+                d: {
+                    xx: 'adxx',
+                },
+                e: 'ae',
+            },
+        };
+        // When we invoke the "convertObject" method and pass the parameter "entry" object: convertObject(entry)
+        // The result is:
+        // {
+        // 'a.b.c.dd': 'abcdd',
+        // 'a.d.xx': 'adxx',
+        // 'a.e': 'ae',
+        // };
+        // Please complete the convertObject method
+        function convertObject(o) {
+            let newObj = {}
+            function getKey(o, key) {
+                for (var k in o) {
+                    if (typeof o[k] === 'object') {
+                        getKey(o[k], key ? key + '.' + k : k)
+                    } else {
+                        newObj[key ? key + '.' + k : k] = o[k]
+                    }
+                }
+                return newObj
+            }
+            getKey(o, '')
+            return newObj
+        }
+
+
+        console.log(convertObject(entry));
+
+
+        /**
+         * 给你一个数结构数据，如何根据树结构里面的一个子节点的唯一key值去查找当前这个子节点的父节点以及更上层的祖先级节点
+        */
+        const data = {
+            a: {
+                b: {
+                    c: {
+                        key: 'c',
+                        cc: {
+                            key: 'cc',
+                            dd: 'abcdd',
+                        }
+                    },
+                },
+                d: {
+                    key: 'd',
+                    xx: 'adxx',
+                },
+                e: 'ae',
+            },
+        };
+
+        function getParentKey(o, key) {
+            let parentKey = ''
+            function getKey(o, pKey) {
+                for (var k in o) {
+                    if (typeof o[k] === 'object') {
+                        if (o[k].key === key) {
+                            parentKey = pKey + '.' + k
+                        } else {
+                            getKey(o[k], pKey + '.' + k)
+                        }
+                    }
+                }
+                return parentKey
+            }
+            getKey(o, 'data')
+            return parentKey
+
+        }
+        console.log(getParentKey(data, 'cc'))
+    </script>
+</body>
+
+</html>

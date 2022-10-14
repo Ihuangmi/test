@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 实现 call
+    Function.prototype.myCall = function (target, ...args) {
+      // this 指向调用 myCall函数的对象
+      if (typeof this !== "function") {
+        throw new TypeError("not a function")
+      }
+      target = target || window
+      target.fn = this // 隐式绑定，改变函数的调用者间接改变 this 指向
+      let result = target.fn(...args)
+      return result
+    };
+    // 测试
+    let obj = { name: '我是obj中的name' }
+    function foo(...args) {
+      console.log(this.name, args) // 我是obj中的name  ['111', '222']
+    }
+    let s = foo.myCall(obj, '111', '222')
+
+
+    // 实现 apply
+    Function.prototype.myApply = function (target) {
+      // console.log(target)
+      // console.log(arguments)
+      if (typeof this !== "function") {
+        throw new TypeError("not a function");
+      }
+      if (!Array.isArray(arguments[1])) {
+        throw new Error('arg not a array')
+      }
+      target = target || window
+      target.fn = this
+      let args = arguments[1]
+      let result = target.fn(args)
+      return result
+    };
+
+    const obj2 = { name: 'mary' };
+    function foo(...args) {
+      console.log(this.name, args);
+    }
+    foo.prototype.name = 'jack';
+    const s2 = foo.myApply(obj2, ['111', '222']);
+
+
+    /*
+    与 call 与 apply 的区别： fn.bind(obj) 不会立即执行 fn 函数，而 call, apply 会立即执行
+    bind 返回的新函数可以普通调用也可以构造函数方式调用，当为构造函数时，this 是指向实例的
+    bind() 方法的参数具有一个特性，就是函数柯里化，简单来说就是保留一个参数的位置，再第二次传参的时候自动把参数存入到这个位置中
+    */
+    // 实现 bind
+    Function.prototype.mybind = function (thisArg) {
+      if (typeof this !== 'function') {
+        throw TypeError("Bind must be called on a function");
+      }
+      const args = Array.prototype.slice.call(arguments, 1),
+        self = this,
+        // 构建一个干净的函数，用于保存原函数的原型
+        nop = function () { },
+        // 绑定的函数
+        bound = function () {
+          // this instanceof nop, 判断是否使用 new 来调用 bound
+          // 如果是 new 来调用的话，this的指向就是其实例，
+          // 如果不是 new 调用的话，就改变 this 指向到指定的对象 o
+          return self.apply(
+            this instanceof nop ? this : thisArg,
+            args.concat(Array.prototype.slice.call(arguments))
+          );
+        };
+      // 箭头函数没有 prototype，箭头函数this永远指向它所在的作用域
+      if (this.prototype) {
+        nop.prototype = this.prototype;
+      }
+      // 修改绑定函数的原型指向
+      bound.prototype = new nop();
+      return bound;
+    }
+
+    // 测试
+    let obj3 = { name: "ciel" }
+    function test(x, y, z) {
+      console.log(this.name) // ciel
+      console.log(x + y + z) // 6
+    }
+    let Bound = test.mybind(obj3, 1, 2)
+    Bound(3) // 6
+    // new Bound() // bound {}
+
+
+
+    // 第三版 实现new调用
+    Function.prototype.bindFn = function bind(thisArg) {
+      if (typeof this !== 'function') {
+        throw new TypeError(this + ' must be a function');
+      }
+      // 存储调用bind的函数本身
+      var self = this;
+      // 去除thisArg的其他参数 转成数组
+      var args = [].slice.call(arguments, 1);
+      var bound = function () {
+        // bind返回的函数 的参数转成数组
+        var boundArgs = [].slice.call(arguments);
+        var finalArgs = args.concat(boundArgs);
+        // new 调用时，其实this instanceof bound判断也不是很准确。es6 new.target就是解决这一问题的。
+        if (this instanceof bound) {
+          // 这里是实现上文描述的 new 的第 1, 2, 4 步
+          // 1.创建一个全新的对象
+          // 2.并且执行[[Prototype]]链接
+          // 4.通过`new`创建的每个对象将最终被`[[Prototype]]`链接到这个函数的`prototype`对象上。
+          // self可能是ES6的箭头函数，没有prototype，所以就没必要再指向做prototype操作。
+          if (self.prototype) {
+            // ES5 提供的方案 Object.create()
+            // bound.prototype = Object.create(self.prototype);
+            // 但 既然是模拟ES5的bind，那浏览器也基本没有实现Object.create()
+            // 所以采用 MDN ployfill方案 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+            function Empty() { }
+            Empty.prototype = self.prototype;
+            bound.prototype = new Empty();
+          }
+          // 这里是实现上文描述的 new 的第 3 步
+          // 3.生成的新对象会绑定到函数调用的`this`。
+          var result = self.apply(this, finalArgs);
+          // 这里是实现上文描述的 new 的第 5 步
+          // 5.如果函数没有返回对象类型`Object`(包含`Functoin`, `Array`, `Date`, `RegExg`, `Error`)，
+          // 那么`new`表达式中的函数调用会自动返回这个新的对象。
+          var isObject = typeof result === 'object' && result !== null;
+          var isFunction = typeof result === 'function';
+          if (isObject || isFunction) {
+            return result;
+          }
+          return this;
+        }
+        else {
+          // apply修改this指向，把两个函数的参数合并传给self函数，并执行self函数，返回执行结果
+          return self.apply(thisArg, finalArgs);
+        }
+      };
+      return bound;
+    }
+
+
+
+  </script>
+</body>
+
+</html>

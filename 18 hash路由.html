@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端路由实现</title>
+</head>
+<!-- 参考： https://juejin.cn/post/6844903890278694919 -->
+
+<body>
+    <ul>
+        <li><a href="">首页</a></li>
+        <li><a href="#/user">个人中心</a></li>
+        <li><a href="#/login">登录</a></li>
+    </ul>
+    <h1 id="view"></h1>
+
+    <script>
+        // 1、hash模式   
+        // 使用到的API： hashchange   location.hash 
+        class HashRouter {
+            constructor() {
+                // 用于存储每个hash对应的回调函数
+                this.routers = {}
+                // 监听hash变化，并注册回调函数
+                window.addEventListener('hashchange', this.load.bind(this))
+            }
+            // 用于注册每个视图
+            register(hash, callback = function () { }) {
+                this.routers[hash] = callback
+            }
+            // hash不存在时认为是首页视图
+            registerIndex(callback = function () { }) {
+                this.routers['index'] = callback
+            }
+            // 没有匹配到对应hash
+            registerNotFound(callback = function () { }) {
+                this.routers['notFound'] = callback
+            }
+            registerError(callback = function () { }) {
+                this.routers['error'] = callback
+            }
+            load() {
+                console.log(this)
+                let hash = location.hash.slice(1), handler
+                // = hash ? this.routers[hash] : this.routers['index']
+                if (hash) {
+                    if (this.routers.hasOwnProperty(hash)) {
+                        handler = this.routers[hash]
+                    } else {
+                        handler = this.routers['notFound']
+                    }
+                } else {
+                    handler = this.routers['index']
+                }
+
+
+                try {
+                    handler.call(this)
+                } catch (error) {
+                    this.routers['error'].call(this, error)
+                }
+            }
+        }
+
+
+        // 应用
+        let view = document.getElementById('view')
+        const router = new HashRouter()
+        router.registerIndex(() => view.innerHTML = '首页')
+        router.register('/user', () => view.innerHTML = '个人中心')
+        router.register('/login', () => view.innerHTML = '登录')
+        router.registerNotFound(() => view.innerHTML = '页面未找到')
+        router.registerError((e) => view.innerHTML = '页面异常，错误消息：<br>' + e.message)
+        router.load()
+
+
+
+
+
+
+        /**
+         * 当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件被触发，而无需等待样式表、图像和子框架的完全加载。
+        */
+        // let view = null
+        // window.addEventListener('DOMContentLoaded', onLoad)
+
+        // function onLoad() {
+        //     console.log('HTML加载完成')
+        //     view = document.getElementById('view')
+        //     onHashChange()
+        // }
+
+        // window.addEventListener('hashchange', onHashChange)
+
+        // function onHashChange() {
+        //     console.log('The hash has changed!')
+        //     switch (location.hash) {
+        //         case '#/home':
+        //             view.innerHTML = '首页'
+        //             break;
+        //         case '#/user':
+        //             view.innerHTML = '个人中心'
+        //             break;
+        //         case '#/login':
+        //             view.innerHTML = '登录'
+        //             break;
+        //     }
+        // }
+
+    </script>
+</body>
+
+</html>

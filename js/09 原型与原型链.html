@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JS原型与原型链/作用域</title>
+</head>
+
+<body>
+  <!-- 函数执行时所在的作用域，是定义时的作用域，而不是调用时所在的作用域 -->
+  <script>
+    function Person() {
+      this.age = 18;
+    }
+    // 虽然写在注释里，但是你要注意：
+    // prototype是函数才会有的属性
+    Person.prototype.name = "Kevin";
+    var person1 = new Person();
+
+    console.log("Person.prototype=", Person.prototype);
+    console.log(`Person === Person.prototype.constructor`, Person === Person.prototype.constructor); //true
+    console.log("person1.__proto__=", person1.__proto__);
+    console.log(`person1=`, person1);
+
+  </script>
+
+  <script>
+    var scope = "global scope";
+    function checkscope() {
+      var scope = "local scope";
+      function f() {
+        return scope;
+      }
+      return f();//local scope
+    }
+    // checkscope();
+    console.log(checkscope())
+
+  </script>
+
+  <script>
+    var scope = "global scope";
+    function checkscope() {
+      var scope = "local scope";
+      function f() {
+        return scope;
+      }
+      return f;//f函数
+    }
+    // checkscope()();
+    var a = checkscope()
+    console.log(a())
+    console.log(checkscope())
+    console.log(checkscope()())
+  </script>
+</body>
+
+</html>

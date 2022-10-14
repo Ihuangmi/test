@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    const arr = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+
+    // indexOf去重（或者使用include去重）
+    function unique(arr) {
+      let uniArr = []
+      for (let i = 0; i < arr.length; i++) {
+        if (uniArr.indexOf(arr[i]) < 0) {
+          uniArr.push(arr[i])
+        }
+      }
+      return uniArr
+    }
+    console.log(unique(arr))
+
+    // Set去重
+    let uniArr2 = [...new Set(arr)]
+    console.log(uniArr2)
+
+    // 利用对象属性去重
+    function unique3(arr) {
+      let uniArr3 = [], obj = {}
+      for (let i = 0; i < arr.length; i++) {
+        if (!obj[arr[i]]) {
+          obj[arr[i]] = arr[i]
+          uniArr3.push(arr[i])
+        }
+      }
+      console.log(obj)
+      return uniArr3
+    }
+    console.log(unique3(arr))
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>判断js数据类型</title>
+</head>
+
+<body>
+  <script>
+
+    // 判断一个js变量的准确类型
+    Object.prototype.toString.call(1) // "[object Number]"
+    Object.prototype.toString.call('hi') // "[object String]"
+    Object.prototype.toString.call({ a: 'hi' }) // "[object Object]"
+    Object.prototype.toString.call([1, 'a']) // "[object Array]"
+    Object.prototype.toString.call(true) // "[object Boolean]"
+    Object.prototype.toString.call(() => { }) // "[object Function]"
+    Object.prototype.toString.call(null) // "[object Null]"
+    Object.prototype.toString.call(undefined) // "[object Undefined]"
+    Object.prototype.toString.call(Symbol(1)) // "[object Symbol]"
+
+
+    // 手动实现 tpyeof
+    function myTypeof(params) {
+      const type = Object.prototype.toString.call(params).slice(8, -1).toLowerCase()
+      const map = {
+        'number': true,
+        'string': true,
+        'boolean': true,
+        'undefined': true,
+        'bigint': true,
+        'symbol': true,
+        'function': true
+      }
+      return map[type] ? type : 'object'
+    }
+
+    // 测试用例
+    myTypeof(1)
+    myTypeof('')
+    myTypeof(false)
+    myTypeof(null)
+    myTypeof(undefined)
+    myTypeof(10n) // bigint
+    myTypeof(Symbol())
+    myTypeof(() => { })
+    myTypeof([])
+    myTypeof({})
+
+
+
+
+    /**
+     * 手动实现 instanceof
+     * instanceof 作用就是判断一个实例是否属于某种类型
+     * 
+     * instanceof 实现原理就是只要右边变量的 prototype 在左边变量的原型链上即可。
+     * 因此，instanceof 在查找的过程中会遍历左边变量的原型链，直到找到右边变量的 prototype，
+     * 如果查找失败，则会返回 false，告诉我们左边变量并非是右边变量的实例。
+    */
+    function myInstanceof(leftVaule, rightVaule) {
+      let rightProto = rightVaule.prototype, // 取右表达式的 prototype 值
+        leftProto = leftVaule.__proto__ // 取左表达式的__proto__值
+      while (true) {
+        if (leftProto === null) {
+          return false
+        }
+        if (leftProto === rightProto) {
+          return true
+        }
+        leftProto = leftProto.__proto__
+      }
+    }
+
+    console.log(myInstanceof([1, 2], Array))
+    console.log(myInstanceof(1, Number))
+    console.log(myInstanceof([1, 2, 3], Object))
+    console.log(myInstanceof({ a: 'aaa' }, Object))
+    console.log(myInstanceof(Object, Object))
+    console.log(myInstanceof(Array, Object))
+  </script>
+</body>
+
+</html>

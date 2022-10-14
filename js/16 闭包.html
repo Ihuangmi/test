@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function makeFunc() {
+        //     var name = "Mozilla"
+        //     function displayName() {
+        //         alert(name)
+        //     }
+        //     return displayName
+        // }
+
+        // var myFunc = makeFunc()
+        // myFunc()  // Mozilla
+
+
+        // function makeAdder(x) {
+        //     return function (y) {
+        //         return x + y
+        //     }
+        // }
+
+        // var add5 = makeAdder(5)
+        // var add10 = makeAdder(10)
+
+        // console.log(add5(2))  // 7
+        // console.log(add10(2)) // 12
+
+        // add5 = null          // 释放对闭包的引用 
+        // console.log(add5(1)) //Uncaught TypeError: add5 is not a function
+
+
+
+
+        // var add = (function () {
+        //     var counter = 0;
+        //     return function () {
+        //         return counter += 1;
+        //     }
+        // })();
+
+        // console.log(add());//1
+        // console.log(add());//2
+        // console.log(add());//3
+
+
+        // const myFn = once(fn)
+        // myFn() // fn只执行一次
+        // myFn()
+        // myFn()
+        const myFn = (function (fn) {
+            let flag = 0
+            return function () {
+                if (flag === 0) {
+                    fn()
+                    flag += 1
+                }
+            }
+        })(fn)
+        function fn() {
+            console.log('只执行一次')
+        }
+        myFn(fn)
+        myFn(fn)
+        myFn(fn)
+
+
+        let name
+        console.log(name)
+
+
+    </script>
+</body>
+
+</html>
