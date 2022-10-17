@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        font-size: 16px;
+      }
+      /* em	在 font-size 中使用是相对于父元素的字体大小，在其他属性中使用是相对于自身的字体大小，如 width */
+      .box {
+        font-size: 12px;
+      }
+      .son {
+        /*  在 font-size 中使用是相对于父元素的字体大小： 2 * 12px = 24px */
+        font-size: 2em;
+        /* 在其他属性中使用是相对于自身的字体大小：10 * 24px = 240px */
+        width: 10em;
+        height: 10em;
+        background: darkcyan;
+      }
+      /* rem 是相对于根元素的字体大小 */
+      .a {
+        font-size: 1rem;
+        width: 10rem;
+        height: 10rem;
+        background: rgb(90, 80, 231);
+      }
+
+      input[type="text"],
+      input[type="email"] {
+        border: 2px solid #000;
+        margin: 0 0 1em 0;
+        padding: 10px;
+      }
+
+      input[type="submit"] {
+        border: 3px solid #333;
+        background-color: #999;
+        border-radius: 5px;
+        padding: 10px 2em;
+        font-weight: bold;
+        color: #fff;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="son">hhh</div>
+    </div>
+
+    <div class="a">hello</div>
+    <br />
+
+    <form>
+      <div><label for="name">Name</label> <input type="text" id="name" /></div>
+      <div>
+        <label for="email">Email</label> <input type="email" id="email" />
+      </div>
+
+      <div class="buttons"><input type="submit" value="Submit" /></div>
+    </form>
+  </body>
+</html>

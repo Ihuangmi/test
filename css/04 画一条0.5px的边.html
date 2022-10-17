@@ -16,6 +16,11 @@
       }
 
       /* 方法一：使用 scaleY 将高度为 1px 缩放至0.5倍， */
+      /* .line {
+        height: 1px;
+        transform: scaleY(0.5);
+        transform-origin: 50% 100%;
+      } */
       .hr.scale-half {
         height: 1px;
         transform: scaleY(0.5);
@@ -30,6 +35,10 @@
       }
 
       /* 方法三：设置box-shadow的第二个参数为0.5px，表示阴影垂直方向的偏移为0.5px */
+      .line {
+        height: 1px;
+        box-shadow: 0 0.5px 0 #000;
+      }
       .hr.boxshadow {
         height: 1px;
         background: none;
@@ -49,5 +58,11 @@
 
     <p>box-shadow: 0 0.5px 0 #000</p>
     <div class="hr boxshadow"></div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="line"></div>
   </body>
 </html>

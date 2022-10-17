@@ -7,20 +7,22 @@
     <title>Document</title>
     <style>
       .box {
+        width: 200px;
+        height: 200px;
         /* display: none; */
-        /* background-image: url("./imgs/1.png"); */
+        background-image: url("./imgs/1.png");
       }
       img {
         display: none;
       }
       .content {
-        background-image: url("./imgs/1.png");
+        background-image: url("./imgs/02.jpg");
       }
     </style>
   </head>
   <body>
     <!-- 给img或img的父元素设置display: none时，图片资源会加载，只是不展示而已 -->
-    <!--  -->
+    <!-- background-image 则都不会加载 -->
     <div class="box">
       <div class="content">1</div>
       <h4>hello</h4>

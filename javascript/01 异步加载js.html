@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 禁止网页被iframe引用 -->
+    <!-- <meta http-equiv="X-Frame-Options" content="deny" /> -->
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="header">header</p>
+    <button onclick="eidt()">修改</button>
+  </body>
+
+  <script>
+    function eidt() {
+      document.getElementById("header").innerHTML = "修改了header的内容";
+    }
+  </script>
+
+  <script src="./01.js" defer></script>
+  <script src="./02.js" async></script>
+
+  <!-- noscript 元素用来定义在脚本未被执行时的替代内容（文本）。 -->
+  <!-- <noscript>您的浏览器暂不支持JavaScript</noscript> -->
+</html>
