@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // #region
+        // 高阶函数是一个接收函数作为参数或将函数作为输出返回的函数。
+        // 例如，Array.prototype.map，Array.prototype.filter 和 Array.prototype.reduce 是语言中内置的一些高阶函数。
+
+        // function isString(obj){
+        //     return Object.prototype.toString.call(obj) === '[object String]'
+        // }
+
+
+        // function isNumber(obj){
+        //     return Object.prototype.toString.call(obj) === '[object Number]'
+        // }
+
+        // #endregion
+
+        // 高阶函数
+
+        function isType(type) {
+            return function (obj) {
+                return Object.prototype.toString.call(obj) === `[object ${type}]`
+            }
+        }
+
+        const isString = isType('String')
+        const isNumber = isType('Number')
+
+        console.log(isString('sss'))
+        console.log(isNumber(9))
+    </script>
+</body>
+
+</html>

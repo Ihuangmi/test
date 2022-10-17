@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 浅拷贝：重新在堆中创建内存，拷贝前后对象的基本数据类型互不影响，但拷贝前后对象的引用类型因共享同一块内存，会相互影响。
+    const obj = {
+      name: 'jack',
+      age: 18,
+      hobby: ['篮球', '排球'],
+      family: {
+        father: 'David',
+        mather: 'Jenny',
+      }
+    }
+
+    // 1、递归实现
+    function shallowClone(obj) {
+      if (typeof obj === 'object' && obj !== null) {
+        const cloneTarget = Array.isArray(obj) ? [] : {};
+        for (let key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            cloneTarget[key] = obj[key];
+          }
+        }
+        return cloneTarget;
+      } else {
+        return obj;
+      }
+    }
+
+    // 测试
+    let cloneObj = shallowClone(obj)
+    cloneObj.family.father = 'John'
+    console.log(cloneObj)
+    console.log(obj)
+
+    // 2、Object.assign()
+    console.log(Object.assign(obj))
+
+    // 3、展开运算符...
+    console.log({ ...obj })
+
+
+    // 数组拷贝  1、Array.prototype.concat()   2、Array.prototype.slice()
+    let arr = [{ id: 'xxxx' }, 1, 2, 3, 4, 5]
+    let arr2 = arr.concat()
+    arr2[0].id = 100
+    console.log(arr)
+
+
+
+
+  </script>
+</body>
+
+</html>

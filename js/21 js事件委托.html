@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="box">
+        <li data-key="li1"><span id="li1">button1</span></li>
+        <li data-key="li2"><span>button2</span></li>
+        <li class="li3" data-key="li3"><span>button3</span></li>
+        <li data-key="li4"><span>button4</span></li>
+        <li data-key="li5"><span>button5</span></li>
+    </ul>
+    <script>
+        // currentTarget：表示此事件绑定的元素
+        // target：通俗理解为表示触发一系列事件的源头
+        let box = document.getElementById('box')
+        // box.addEventListener('click', function (e) {
+        //     // console.log(e.currentTarget)
+        //     console.log(e.target.parentNode)
+        //     console.log(e.target.getAttribute('data-key'))
+        //     console.log(e.target.innerHTML)
+        //     // console.log(e.target.id)
+        //     // if (e.target.tagName.toLowerCase() === 'span') {
+        //     //     console.log(e.target.innerHTML)
+        //     // }
+        // })
+
+
+
+
+
+        // 思路是点击 span 后，递归遍历 span 的祖先元素看其中有没有 ul 里面的 li。
+        function delegate(element, eventType, selector, fn) {
+            element.addEventListener(eventType, e => {
+                let el = e.target
+                while (!el.matches(selector)) {
+                    if (element === el) {
+                        el = null
+                        break
+                    }
+                    el = el.parentNode
+                }
+                el && fn.call(el, e, el)
+            })
+            return element
+        }
+        delegate(box, 'click', 'li', function (e, el) {
+            console.log('el', el)
+        })
+
+    </script>
+</body>
+
+</html>

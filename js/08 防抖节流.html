@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  #box {
+    width: 100vw;
+    height: 100vh;
+    background: #ccc;
+    font-size: 40px;
+    text-align: center;
+    line-height: 500px;
+  }
+
+</style>
+
+<body>
+  <div id="box"></div>
+
+  <script>
+    // 防抖：在一定时间内多次触发只执行一次
+    function debounce(func, delay) {
+      let timer
+      return function () {
+        clearTimeout(timer) // 如果持续触发，那么就清除定时器，定时器的回调就不会执行。
+        timer = setTimeout(() => {
+          console.log(arguments[0])
+          func.apply(this, arguments)
+        }, delay)
+      }
+    }
+    const box = document.getElementById('box')
+    box.onmousemove = debounce(function (e) {
+      box.innerHTML = `${e.clientX}, ${e.clientY}`
+    }, 1000)
+
+
+    // 节流：每间隔一段时间执行一次
+    function throttle(fun, time) {
+      let t1 = 0 //初始时间
+      return function () {
+        let t2 = new Date() //当前时间
+        if (t2 - t1 > time) {
+          fun.apply(this, arguments)
+          t1 = t2
+        }
+      }
+    }
+
+
+  </script>
+</body>
+
+</html>

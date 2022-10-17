@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>new</title>
+</head>
+
+<body>
+  <script>
+    // 构造函数:
+    function myFunction(arg1, arg2) {
+      this.firstName = arg1;
+      this.lastName = arg2;
+    }
+
+    // This    creates a new object
+    var a = new myFunction("Li", "Cherry");
+    a.lastName;  // "Cherry"
+
+    /**
+       new 的过程：伪代码表示：
+     
+      var a = new myFunction("Li","Cherry")
+
+      new myFunction {
+          var obj = {}
+          obj.__proto__ = myFunction.prototype
+          var result = myFunction.call(obj, "Li", "Cherry")
+          return typeof result === 'obj' ? result : obj
+      }
+
+      1、创建一个空对象 obj;
+      2、将新创建的空对象的隐式原型指向其构造函数的显示原型。
+      3、使用 call 改变 this 的指向
+      4、如果无返回值或者返回一个非对象值，则将 obj 返回作为新对象；如果返回值是一个新对象的话那么直接直接返回该对象。
+
+    */
+  </script>
+
+</body>
+
+</html>

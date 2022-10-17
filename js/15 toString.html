@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 判断一个js变量的准确类型
+    Object.prototype.toString.call(1) // "[object Number]"
+
+    Object.prototype.toString.call('hi') // "[object String]"
+
+    Object.prototype.toString.call({ a: 'hi' }) // "[object Object]"
+
+    Object.prototype.toString.call([1, 'a']) // "[object Array]"
+
+    Object.prototype.toString.call(true) // "[object Boolean]"
+
+    Object.prototype.toString.call(() => { }) // "[object Function]"
+
+    Object.prototype.toString.call(null) // "[object Null]"
+
+    Object.prototype.toString.call(undefined) // "[object Undefined]"
+
+    Object.prototype.toString.call(Symbol(1)) // "[object Symbol]"
+
+  </script>
+</body>
+
+</html>
