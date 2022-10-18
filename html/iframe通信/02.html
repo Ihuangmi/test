@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <h1>这是02页面</h1> -->
+
+    <iframe
+      src="http://127.0.0.1:5500/html/iframe%E9%80%9A%E4%BF%A1/01.html"
+      frameborder="0"
+      width="100%"
+      height="1000px"
+    ></iframe>
+
+    <script>
+      function hello() {
+        console.log("hello");
+      }
+      const iframe = document.getElementsByTagName("iframe")[0];
+      console.log(`iframe.contentWindow=`, iframe.contentWindow);
+      console.log(`iframe.contentDocument=`, iframe.contentDocument);
+
+      iframe.onload = function () {
+        // 访问iframe引用页面的方法，注意要在onload之后才能访问
+        iframe.contentWindow.log();
+        console.log("contentWindow.location 🥝", iframe.contentWindow.location);
+
+        // 有相同的源 我们可以进行任何操作
+        iframe.contentDocument.getElementsByTagName("h1")[0].innerHTML =
+          "2修改了1的内容";
+        // 可以直接修改 iframe 地址, 不受同源策略的限制。 有的网站不支持被iframe引用, 所以会报错。 注意区分错误信息。
+        iframe.contentWindow.location = "http://www.360doc.com";
+      };
+    </script>
+  </body>
+</html>
