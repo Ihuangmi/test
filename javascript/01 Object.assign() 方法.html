@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 禁止网页被iframe引用 -->
+    <!-- <meta http-equiv="X-Frame-Options" content="deny" /> -->
+    <title>Document</title>
+  </head>
+  <body>
+    <p id="header">header</p>
+    <button onclick="eidt()">修改</button>
+  </body>
+
+  <script>
+    function eidt() {
+      document.getElementById("header").innerHTML = "修改了header的内容";
+    }
+
+    const num = 10;
+    console.log(num);
+
+    // Object.assign() 方法将所有可枚举（Object.propertyIsEnumerable() 返回 true）的自有（Object.hasOwnProperty() 返回 true）属性从一个或多个源对象复制到目标对象，返回修改后的对象。
+    const obj = Object.assign({ name: "mimi" }, ["movies", "basketball", 100]);
+    console.log(`obj=`, obj);
+
+    const obj2 = Object.assign(
+      { name: "hm", age: 20 },
+      { age: 18, hobby: ["movies", "basketball"] }
+    );
+    console.log(`obj2=`, obj2);
+
+    function test() {
+      ("use strict");
+
+      // 假如源对象是一个对象的引用，它仅仅会复制其引用值。
+      let obj1 = { a: 0, b: { c: 0 } };
+      let obj2 = Object.assign({}, obj1);
+      console.log(JSON.stringify(obj2)); // { "a": 0, "b": { "c": 0}}
+
+      obj1.a = 1;
+      console.log(JSON.stringify(obj1)); // { "a": 1, "b": { "c": 0}}
+      console.log(JSON.stringify(obj2)); // { "a": 0, "b": { "c": 0}}
+
+      obj2.a = 2;
+      console.log(JSON.stringify(obj1)); // { "a": 1, "b": { "c": 0}}
+      console.log(JSON.stringify(obj2)); // { "a": 2, "b": { "c": 0}}
+
+      obj2.b.c = 3;
+      console.log(JSON.stringify(obj1)); // { "a": 1, "b": { "c": 3}}
+      console.log(JSON.stringify(obj2)); // { "a": 2, "b": { "c": 3}}
+
+      // Deep Clone
+      obj1 = { a: 0, b: { c: 0 } };
+      let obj3 = JSON.parse(JSON.stringify(obj1));
+      obj1.a = 4;
+      obj1.b.c = 4;
+      console.log(JSON.stringify(obj3)); // { "a": 0, "b": { "c": 0}}
+    }
+
+    test();
+
+    // 基本类型会被包装为对象
+    const v1 = "abc";
+    const v2 = true;
+    const v3 = 10;
+    const v4 = Symbol("foo");
+
+    const obj3 = Object.assign({}, v1, null, v2, undefined, v3, v4);
+    // 原语将被包装，null和undefined将被忽略。
+    // 注意，只有字符串包装器可以有自己的可枚举属性。
+    console.log(obj3); // { "0": "a", "1": "b", "2": "c" }
+
+    // 异常会打断后续拷贝任务
+    const target = Object.defineProperty({}, "foo", {
+      value: 1,
+      writable: false,
+    }); // target.foo is a read-only property
+
+    Object.assign(
+      target,
+      { bar: 2 },
+      { foo2: 3, foo1: 3, foo3: 3 },
+      { baz: 4 }
+    );
+    // TypeError: "foo" is read-only
+    // The Exception is thrown when assigning target.foo
+
+    console.log(target); //
+    console.log(target.bar); // 2, the first source was copied successfully.
+    console.log(target.foo2); // 3, the first property of the second source was copied successfully.
+    console.log(target.foo); // 1, exception is thrown here.
+    console.log(target.foo3); // undefined, assign method has finished, foo3 will not be copied.
+    console.log(target.baz); // undefined, the third source will not be copied either.
+  </script>
+
+  <!-- <script src="./01.js" defer></script> -->
+  <!-- <script src="./02.js" async></script> -->
+  <script src="./03 forEach中执行异步函数.js"></script>
+
+  <!-- noscript 元素用来定义在脚本未被执行时的替代内容（文本） -->
+  <!-- <noscript>您的浏览器暂不支持JavaScript</noscript> -->
+</html>

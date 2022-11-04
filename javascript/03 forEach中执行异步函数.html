@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let promiseTask = (num) => {
+        return new Promise((resolve) => {
+          resolve(num * num);
+        });
+      };
+
+      const task = [1, 2, 3];
+      let square = [];
+
+      async function DoTaskByForEach() {
+        task.forEach(async (item) => {
+          square.push(await promiseTask(item));
+        });
+      }
+
+      async function DoTaskByFor() {
+        for (let i = 0; i < task.length; i++) {
+          await promiseTask(task[i]);
+        }
+      }
+      //   DoTaskByFor(); // 每隔1秒依次打印 1 4 9
+
+      async function DoTaskByForOf() {
+        for (let item of task) {
+          await promiseTask(item);
+        }
+      }
+      //   DoTaskByForOf(); // 每隔1秒依次打印 1 4 9
+
+      async function fn() {
+        await DoTaskByForEach(); // 同时打印 1 4 9
+        console.log("DoTaskByForEach之后");
+        if (square.length) {
+          console.log("xxxxxxxxxxxx");
+        }
+      }
+      fn();
+
+      // 结论：
+      // forEach 不会按顺序执行 而是并发执行异步任务
+      // for of 和 普通的for循环却能顺序执行异步任务
+
+      /************************************************************/
+
+      let arr = [1, 2, 3, 4, 5, 6, 7];
+      let arr2 = [];
+      // 当forEach内部处理异步操作时，则forEach同时也处于异步状态，并不会阻塞进程，而是让下面的语句先执行
+      // arr.forEach((item) => {
+      //   setTimeout(() => {
+      //     arr2.push(item);
+      //   }, 1000);
+      // });
+      // console.log(arr2); // []
+
+      // 一、forEach外部等待forEach执行完成
+      // function fn(item) {
+      //   return new Promise((resolve) => {
+      //     setTimeout(() => {
+      //       arr2.push(item);
+      //       resolve();
+      //     }, 1000);
+      //   });
+      // }
+
+      // let asyncFn = [];
+      // arr.forEach((a) => {
+      //   asyncFn.push(fn(a));
+      //   console.log("这里是等待每一次循环结束后的操作", a);
+      // });
+
+      // async function fnn() {
+      //   await Promise.all(asyncFn);
+      //   console.log(arr2); // 1秒后打印 [1, 2, 3, 4, 5, 6, 7]
+      // }
+      // fnn();
+
+      // forEach处理异步函数的同步问题
+      // async function getArr3() {
+      //   const arr3 = await Promise.all(
+      //     arr.map(async (item) => {
+      //       return new Promise((resolve) => {
+      //         setTimeout(() => {
+      //           resolve(item);
+      //         }, 1000);
+      //       });
+      //     })
+      //   );
+      //   console.log(arr3);
+      // }
+      // getArr3();
+    </script>
+  </body>
+</html>
