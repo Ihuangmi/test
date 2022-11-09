@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="id">
+      <button id="btn">点击</button>
+    </div>
+
+    <script>
+      const div = document.querySelector("#id");
+      const btn = document.querySelector("#btn");
+
+      document.addEventListener("click", (e) => {
+        console.log(1);
+      });
+
+      div.addEventListener("click", (e) => {
+        console.log(2);
+      });
+
+      div.addEventListener("click", (e) => {
+        console.log(3);
+        // e.stopPropagation();  // 5 > 2 > 3 > 4
+        // e.stopImmediatePropagation(); // 5 > 2 > 3
+        // 结论：e.stopImmediatePropagation() 相当于e.stopPropagation()的增强版，不但可以阻止向上的冒泡，还能够阻止同级的扩散
+      });
+
+      div.addEventListener("click", (e) => {
+        console.log(4);
+      });
+
+      btn.addEventListener("click", () => {
+        console.log(5);
+      });
+
+      //   点击按钮的时候，执行顺序是：5 > 2 > 3 > 4 > 1，原因是执行了冒泡，会从最底层的btn开始执行，然后是div，最后才是顶层document
+    </script>
+  </body>
+</html>

@@ -10,49 +10,64 @@
     <script>
       let promiseTask = (num) => {
         return new Promise((resolve) => {
-          resolve(num * num);
+          setTimeout(() => {
+            console.log(num * num);
+            resolve(num * num);
+          }, 1000);
         });
       };
 
       const task = [1, 2, 3];
       let square = [];
 
+      // async function DoTaskByFor() {
+      //   for (let i = 0; i < task.length; i++) {
+      //     square.push(await promiseTask(task[i]));
+      //   }
+      // }
+      // // DoTaskByFor(); // 每隔1秒依次打印 1 4 9
+
+      // async function fn() {
+      //   await DoTaskByFor();
+      //   console.log("for循环之后");
+      //   console.log(`square`, square);
+      // }
+      // fn();
+
       async function DoTaskByForEach() {
         task.forEach(async (item) => {
           square.push(await promiseTask(item));
         });
       }
+      // DoTaskByForEach(); // 同时打印 1 4 9
+      async (fn) => {
+        await fn();
+      };
+      /**
+       * 相当于每次循环，都只是回调执行了外层的 fn, 执行就完事了，而没有对内部的 await 做一些操作，其实就是在循环中没有去等待执行 await 的结果，
+       * 所以里面的异步 sleep, 还是放到异步队列去等待同步执行完成后再去执行，也就是先打印再去 sleep, 所以没有 sleep 的效果
+       */
 
-      async function DoTaskByFor() {
-        for (let i = 0; i < task.length; i++) {
-          await promiseTask(task[i]);
-        }
+      async function newTaskByForEach() {
+        square = await Promise.all(task.map((t) => promiseTask(t)));
       }
-      //   DoTaskByFor(); // 每隔1秒依次打印 1 4 9
+      // newTaskByForEach(); // 同时打印 1 4 9
 
-      async function DoTaskByForOf() {
-        for (let item of task) {
-          await promiseTask(item);
-        }
+      async function fn2() {
+        // await DoTaskByForEach();
+        await newTaskByForEach();
+        console.log("forEach循环之后");
+        console.log(`square`, square);
       }
-      //   DoTaskByForOf(); // 每隔1秒依次打印 1 4 9
-
-      async function fn() {
-        await DoTaskByForEach(); // 同时打印 1 4 9
-        console.log("DoTaskByForEach之后");
-        if (square.length) {
-          console.log("xxxxxxxxxxxx");
-        }
-      }
-      fn();
+      fn2();
 
       // 结论：
-      // forEach 不会按顺序执行 而是并发执行异步任务
-      // for of 和 普通的for循环却能顺序执行异步任务
+      // forEach 不会按顺序执行 而是同时执行异步任务
+      // for 循环却能顺序执行异步任务
 
       /************************************************************/
 
-      let arr = [1, 2, 3, 4, 5, 6, 7];
+      let arr = [1, 2, 3, 4];
       let arr2 = [];
       // 当forEach内部处理异步操作时，则forEach同时也处于异步状态，并不会阻塞进程，而是让下面的语句先执行
       // arr.forEach((item) => {
@@ -62,35 +77,13 @@
       // });
       // console.log(arr2); // []
 
-      // 一、forEach外部等待forEach执行完成
-      // function fn(item) {
-      //   return new Promise((resolve) => {
-      //     setTimeout(() => {
-      //       arr2.push(item);
-      //       resolve();
-      //     }, 1000);
-      //   });
-      // }
-
-      // let asyncFn = [];
-      // arr.forEach((a) => {
-      //   asyncFn.push(fn(a));
-      //   console.log("这里是等待每一次循环结束后的操作", a);
-      // });
-
-      // async function fnn() {
-      //   await Promise.all(asyncFn);
-      //   console.log(arr2); // 1秒后打印 [1, 2, 3, 4, 5, 6, 7]
-      // }
-      // fnn();
-
       // forEach处理异步函数的同步问题
       // async function getArr3() {
       //   const arr3 = await Promise.all(
       //     arr.map(async (item) => {
       //       return new Promise((resolve) => {
       //         setTimeout(() => {
-      //           resolve(item);
+      //           resolve(item * item);
       //         }, 1000);
       //       });
       //     })
@@ -98,6 +91,69 @@
       //   console.log(arr3);
       // }
       // getArr3();
+    </script>
+
+    <script>
+      // forEach源码：
+      // Production steps of ECMA-262, Edition 5, 15.4.4.18
+      // Reference: http://es5.github.io/#x15.4.4.18
+      if (!Array.prototype.forEach) {
+        Array.prototype.forEach = function (callback, thisArg) {
+          var T, k;
+
+          if (this == null) {
+            throw new TypeError(" this is null or not defined");
+          }
+
+          // 1. Let O be the result of calling toObject() passing the
+          // |this| value as the argument.
+          var O = Object(this);
+
+          // 2. Let lenValue be the result of calling the Get() internal
+          // method of O with the argument "length".
+          // 3. Let len be toUint32(lenValue).
+          var len = O.length >>> 0;
+
+          // 4. If isCallable(callback) is false, throw a TypeError exception.
+          // See: http://es5.github.com/#x9.11
+          if (typeof callback !== "function") {
+            throw new TypeError(callback + " is not a function");
+          }
+
+          // 5. If thisArg was supplied, let T be thisArg; else let
+          // T be undefined.
+          if (arguments.length > 1) {
+            T = thisArg;
+          }
+
+          // 6. Let k be 0
+          k = 0;
+
+          // 7. Repeat, while k < len
+          while (k < len) {
+            var kValue;
+
+            // a. Let Pk be ToString(k).
+            //    This is implicit for LHS operands of the in operator
+            // b. Let kPresent be the result of calling the HasProperty
+            //    internal method of O with argument Pk.
+            //    This step can be combined with c
+            // c. If kPresent is true, then
+            if (k in O) {
+              // i. Let kValue be the result of calling the Get internal
+              // method of O with argument Pk.
+              kValue = O[k];
+
+              // ii. Call the Call internal method of callback with T as
+              // the this value and argument list containing kValue, k, and O.
+              callback.call(T, kValue, k, O);
+            }
+            // d. Increase k by 1.
+            k++;
+          }
+          // 8. return undefined
+        };
+      }
     </script>
   </body>
 </html>
