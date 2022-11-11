@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>画一个小猪佩奇</title>
+  </head>
+  <body>
+    <canvas width="1200" height="600" id="canvas">
+      当前浏览器不支持canvas元素
+    </canvas>
+
+    <script>
+      const canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        // 获取绘图上下文
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.fillStyle = "pink";
+        ctx.strokeStyle = "#f95a75";
+        ctx.lineWidth = 4;
+        //半圆
+        ctx.arc(300, 200, 80, 0, Math.PI, false);
+        ctx.fill();
+        //  半圆
+        ctx.beginPath();
+        ctx.arc(310, 200, 70, 0, Math.PI, true);
+        ctx.fill();
+        //  //椭圆
+        ctx.beginPath();
+        ctx.ellipse(250, 160, 120, 60, Math.PI * 0.1, 0, 2 * Math.PI);
+        ctx.fill();
+        //  //耳朵
+        ctx.beginPath();
+        ctx.ellipse(250, 100, 15, 40, Math.PI * 0.05, 0, 2 * Math.PI, true);
+        ctx.ellipse(300, 115, 15, 40, Math.PI * 0.1, 0, 2 * Math.PI, true);
+        ctx.globalCompositeOperation = "destination-over";
+        ctx.fill();
+        ctx.stroke();
+        //  //鼻子
+        ctx.beginPath();
+        ctx.ellipse(162, 127, 22, 32, Math.PI * 0.12, 0, 2 * Math.PI, true);
+        ctx.globalCompositeOperation = "source-over";
+        ctx.lineWidth = 3;
+        ctx.fill();
+        ctx.stroke();
+        //  //左边的眼睛
+        ctx.beginPath();
+        ctx.arc(235, 125, 12, 0, Math.PI * 2);
+        ctx.fillStyle = "#fff";
+        ctx.globalCompositeOperation = "source-over";
+        ctx.fill();
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(232, 123, 4, 0, Math.PI * 2);
+        ctx.fillStyle = "black";
+        ctx.fill();
+
+        // //右边的眼睛
+        ctx.beginPath();
+        ctx.arc(280, 140, 12, 0, Math.PI * 2);
+        ctx.fillStyle = "#fff";
+        ctx.globalCompositeOperation = "source-over";
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(278, 138, 4, 0, Math.PI * 2);
+        ctx.fillStyle = "black";
+        ctx.fill();
+        //  //嘴巴
+        ctx.beginPath();
+        ctx.arc(280, 215, 35, Math.PI * 0.2, Math.PI);
+        ctx.stroke();
+        //  //腮红
+        ctx.beginPath();
+        ctx.arc(325, 200, 30, 0, Math.PI * 2);
+        ctx.fillStyle = "#ff9cc1";
+        ctx.fill();
+        // //衣服
+        ctx.beginPath();
+        ctx.globalCompositeOperation = "destination-over";
+        ctx.fillStyle = "#ff6464";
+        ctx.moveTo(240, 245);
+        ctx.lineTo(200, 400);
+        ctx.lineTo(400, 400);
+        ctx.lineTo(350, 245);
+        ctx.moveTo(240, 245);
+        ctx.quadraticCurveTo(177, 350, 200, 400);
+        ctx.moveTo(350, 245);
+        ctx.quadraticCurveTo(448, 350, 400, 400);
+        ctx.fill();
+        //  //左手
+        ctx.beginPath();
+        ctx.moveTo(230, 290);
+        ctx.lineTo(150, 320);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(175, 312);
+        ctx.lineTo(145, 310);
+        ctx.moveTo(175, 312);
+        ctx.lineTo(170, 330);
+        ctx.stroke();
+        //  //右手
+        ctx.beginPath();
+        ctx.moveTo(380, 290);
+        ctx.lineTo(460, 320);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(435, 312);
+        ctx.lineTo(436, 340);
+        ctx.moveTo(435, 312);
+        ctx.lineTo(450, 300);
+        ctx.stroke();
+        //  //左脚
+        ctx.beginPath();
+        ctx.strokeStyle = "#f08181";
+        ctx.lineWidth = 10;
+        ctx.moveTo(260, 400);
+        ctx.lineTo(260, 450);
+        ctx.stroke();
+        //  //左鞋子
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.globalCompositeOperation = "source-over";
+        ctx.lineCap = "round";
+        ctx.lineWidth = 15;
+        ctx.moveTo(260, 450);
+        ctx.lineTo(240, 450);
+        ctx.stroke();
+
+        //  //右脚
+        ctx.beginPath();
+        ctx.strokeStyle = "#f08181";
+        ctx.lineWidth = 10;
+        ctx.moveTo(350, 400);
+        ctx.lineTo(350, 450);
+        ctx.stroke();
+        //  //右鞋子
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.globalCompositeOperation = "source-over";
+        ctx.lineCap = "round";
+        ctx.lineWidth = 15;
+        ctx.moveTo(350, 450);
+        ctx.lineTo(330, 450);
+        ctx.stroke();
+        //文字
+        ctx.beginPath();
+        ctx.fillStyle = "pink";
+        ctx.ellipse(550, 150, 150, 100, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.font = "50px serif"; // 设置文案大小和字体
+        ctx.fillStyle = "#ee7934"; //  设置填充颜色
+        ctx.fillText("不准再说我丑了", 450, 160, 200);
+      }
+    </script>
+  </body>
+</html>
