@@ -1,5 +1,5 @@
 {
-  "name": "hm-bin",
+  "name": "b-bin",
   "version": "1.1.0",
   "description": "learn node.js",
   "main": "module.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "hm-bin": "./bin/q-cli.js"  
+    "b-bin": "./bin/q-cli.js"  
   },
   "license": "ISC"
 }
