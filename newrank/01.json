@@ -1,69 +1,65 @@
 {
-  "objectType": 0,
-  "longitude": 0,
-  "latitude": 0,
-  "feedLongitude": 0,
-  "feedLatitude": 0,
-  "originalFlag": 0,
-  "topics": [],
-  "isFullPost": 1,
-  "handleFlag": 2,
-  "videoClipTaskId": "14190606694256543868",
-  "traceInfo": {
-    "traceKey": "FPT_1691652133_1740213053",
-    "uploadCdnStart": 1691652133,
-    "uploadCdnEnd": 1691652142
-  },
-  "objectDesc": {
-    "mpTitle": "",
-    "description": "",
-    "extReading": {},
-    "mediaType": 4,
-    "location": {
-      "latitude": 30.642419815063477,
-      "longitude": 104.0431137084961,
-      "city": "成都市",
-      "poiClassifyId": ""
+  "postReq": {
+    "objectType": 0,
+    "longitude": 0,
+    "latitude": 0,
+    "feedLongitude": 0,
+    "feedLatitude": 0,
+    "originalFlag": 0,
+    "topics": [],
+    "isFullPost": 1,
+    "handleFlag": 2,
+    "videoClipTaskId": "14195624588036671593",
+    "traceInfo": {
+      "traceKey": "FPT_1692250302_1587114685",
+      "uploadCdnStart": 1692250301,
+      "uploadCdnEnd": 1692250321
     },
-    "topic": {
-      "finderTopicInfo": ""
+    "objectDesc": {
+      "mpTitle": "",
+      "description": "",
+      "extReading": {},
+      "mediaType": 4,
+      "location": {
+        "latitude": 30.642419815063477,
+        "longitude": 104.0431137084961,
+        "city": "成都市",
+        "poiClassifyId": ""
+      },
+      "topic": {
+        "finderTopicInfo": ""
+      },
+      "event": {},
+      "mentionedUser": [],
+      "media": [
+        {
+          "url": "https://finder.video.qq.com/251/20302/stodownload?bizid=1023&dotrans=0&encfilekey=rjD5jyTuFrIpZ2ibE8T7YmwgiahniaXswqzldmJo62ibpgPLy3z5MBkYYGCsIz2fctkxUDzr2YGlzzZRThHH0lZAiaSgvju6BcKUDpjfkWqM5U2wYZe3BkUHcGw&hy=SH&idx=1&m=&scene=0&token=cztXnd9GyrEjOEtD0MJ8iaMjNhFkHFyethHhRq4jj2Wx5F5PlLmxbdsMBdNmk1Qt9w6aI3E3tKUhmITjBjUKyicA&upid=500100",
+          "fileSize": 1279013,
+          "thumbUrl": "https://finder.video.qq.com/251/20304/stodownload?bizid=1023&dotrans=0&encfilekey=S7s6ianIic0ia4PicKJSfB8EjyjpQibPUAXolul8cLV9fz0SOia3PKWV8o1ticHM6bdDRaJGbKohg3L9ZKSKtgib0Gzr1DPe8tHkNcGNicVpLnmwf4hMqfaTDSWcxsg&hy=SH&idx=1&m=&scene=0&token=cztXnd9GyrEjOEtD0MJ8iaMjNhFkHFyetumpvCY7ClGvtMkaSB1hFBMu2rPkoXlBt4mD1GMmFyGad6GS4o84YlQ",
+          "fullThumbUrl": "https://finder.video.qq.com/251/20304/stodownload?bizid=1023&dotrans=0&encfilekey=S7s6ianIic0ia4PicKJSfB8EjyjpQibPUAXolul8cLV9fz0SOia3PKWV8o1ticHM6bdDRaJGbKohg3L9ZKSKtgib0Gzr1DPe8tHkNcGNicVpLnmwf4hMqfaTDSWcxsg&hy=SH&idx=1&m=&scene=0&token=cztXnd9GyrEjOEtD0MJ8iaMjNhFkHFyetumpvCY7ClGvtMkaSB1hFBMu2rPkoXlBt4mD1GMmFyGad6GS4o84YlQ",
+          "mediaType": 4,
+          "videoPlayLen": 12.366667,
+          "width": 992,
+          "height": 544,
+          "md5sum": "c04a99ef-f0d4-4a39-acb1-732007252728",
+          "cardShowStyle": 2,
+          "urlCdnTaskId": "14195624588036671593"
+        }
+      ]
     },
-    "event": {},
-    "mentionedUser": [],
-    "media": [
-      {
-        "url": "https://finder.video.qq.com/251/20302/stodownload?bizid=1023&dotrans=0&encfilekey=Cvvj5Ix3eewK0tHtibORqcsqchXNh0Gf3sJcaYqC2rQCsx73uXlAw5r7Sn8DFkjvFmKuCRgqPZheugDSfgjHckA7ElfeGOuzxw9q0mm2TbGMDRPIibtwIDicdA2nONSSqwib&hy=SH&idx=1&m=&scene=0&token=cztXnd9GyrF9zIC2a62esibFUia9iaQNTPFwdb6EQrRYvH6NU7SWjsNIECfP14wgsKVQtkbvptNLSm22ibRmm5o99Q&upid=500030",
-        "fileSize": 11629126,
-        "thumbUrl": "https://finder.video.qq.com/251/20304/stodownload?bizid=1023&dotrans=0&encfilekey=rjD5jyTuFrIpZ2ibE8T7YmwgiahniaXswqzGxpLCh7icibNQT7FU0SWicJFRrggDY37LNBjaGnptltUnDHxbtEPr44xobNfyZP3AXkJWmvuwDRWibNwwiaubs3MYTw&hy=SH&idx=1&m=&scene=0&token=cztXnd9GyrF9zIC2a62es2BT63icWV1PYNgrGpAnqH3tM13e6d5LHv2FrOwp2rNiasHyUvhwia1QR9jQ1k2NmJzXg",
-        "fullThumbUrl": "https://finder.video.qq.com/251/20304/stodownload?bizid=1023&dotrans=0&encfilekey=rjD5jyTuFrIpZ2ibE8T7YmwgiahniaXswqzGxpLCh7icibNQT7FU0SWicJFRrggDY37LNBjaGnptltUnDHxbtEPr44xobNfyZP3AXkJWmvuwDRWibNwwiaubs3MYTw&hy=SH&idx=1&m=&scene=0&token=cztXnd9GyrF9zIC2a62es2BT63icWV1PYNgrGpAnqH3tM13e6d5LHv2FrOwp2rNiasHyUvhwia1QR9jQ1k2NmJzXg",
-        "mediaType": 4,
-        "videoPlayLen": 20.799667,
-        "width": 720,
-        "height": 1280,
-        "md5sum": "17c6d55c-e774-453e-89ee-447fec9d737e",
-        "urlCdnTaskId": "14190606694256543868"
-      }
-    ]
+    "report": {
+      "clipKey": "14195624588036671593",
+      "draftId": "14195624588036671593",
+      "height": 544,
+      "width": 992,
+      "duration": 12.366667,
+      "fileSize": 1279013,
+      "uploadCost": 1345
+    },
+    "clientid": "363ad0c0-6767-4a9f-a75d-f6959b377fc7"
   },
-  "report": {
-    "clipKey": "14190606694256543868",
-    "draftId": "14190606694256543868",
-    "timestamp": "1691652147372",
-    "_log_finder_uin": "",
-    "_log_finder_id": "v2_060000231003b20faec8c6e48d1fc6d4ce00e836b07724e439d86536fe69376512eafc1aeb79@finder",
-    "rawKeyBuff": null,
-    "pluginSessionId": null,
-    "scene": 7,
-    "reqScene": 7,
-    "height": 1280,
-    "width": 720,
-    "duration": 20.799667,
-    "fileSize": 11629126,
-    "uploadCost": 5943
-  },
-  "mode": 1,
-  "clientid": "bc8af56a-757f-4ad3-a8bf-4be7856e1c1d",
-  "timestamp": "1691652149540",
+  "objectId": null,
+  "timestamp": "1692250323952",
   "_log_finder_uin": "",
   "_log_finder_id": "v2_060000231003b20faec8c6e48d1fc6d4ce00e836b07724e439d86536fe69376512eafc1aeb79@finder",
   "rawKeyBuff": null,
