@@ -1,3 +1,4 @@
+// 视频发布页重新登录 createOrUpdate 接口返回
 [
   {
     name: "gd_random_834549",
