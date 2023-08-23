@@ -1,4 +1,4 @@
-// 视频发布页重新登录 createOrUpdate 接口返回
+// 报403的cookie
 [
   {
     name: "gd_random_834549",
