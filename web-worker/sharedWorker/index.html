@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>index page</title>
+  </head>
+
+  <style>
+    .page {
+      text-align: center;
+    }
+  </style>
+
+  <body>
+    <div class="page">
+      <h1>index page:</h1>
+      count: <span id="container">0</span>
+      <button id="add">add</button>
+      <br />
+      <h1>利用iframe加载</h1>
+      <br />
+      <iframe src="./iframe.html"></iframe>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    if (!!window.SharedWorker) {
+      const container = document.getElementById("container");
+      const add = document.getElementById("add");
+
+      //   创建 SharedWorker
+      const myWorker = new SharedWorker("./sharedWorker.js");
+
+      //   启动端口
+      myWorker.port.start();
+
+      //   监听 SharedWorker 返回消息
+      myWorker.port.onmessage = (msg) => {
+        console.log("🚀  num:", msg.data);
+        container.innerText = msg.data;
+      };
+
+      add.onclick = () => {
+        // 向 SharedWorker 发送消息
+        myWorker.port.postMessage("add");
+      };
+    }
+  </script>
+</html>

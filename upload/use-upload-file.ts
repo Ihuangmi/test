@@ -40,7 +40,7 @@ interface Options {
 }
 
 // 默认上传选项
-const defaultOptions: Options = {
+const defaultOptions = {
   chunkSize: 5 * 1024 * 1024, // 5 MB
   retryCount: 3,
   concurrency: 3,
