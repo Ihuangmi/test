@@ -8,14 +8,12 @@
 // console.log(minus(1, 2)); // log -1
 
 // self 代表子线程自身，即子线程的全局对象
-console.log("inside worker:", self);
+// console.log("inside worker:", self);
 // 接收到消息
 self.onmessage = (e) => {
   console.log(e.data);
 
   postMessage("Greeting from Worker");
-
-  self.close(); // 关闭 worker
 
   postMessage("Greeting from Worker2");
 
@@ -26,6 +24,7 @@ self.onmessage = (e) => {
 
   Promise.resolve().then(() => {
     console.log("Promise run");
+
     postMessage("Greeting from Promise");
   });
 
@@ -35,6 +34,8 @@ self.onmessage = (e) => {
       postMessage("Greeting from Loop");
     }
   }
+
+  self.close(); // 关闭 worker
 };
 
 // 当worker内部出现错误时触发

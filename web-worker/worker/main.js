@@ -5,7 +5,7 @@ const myWorker = new Worker("./worker.js", {
   type: "module",
 });
 
-console.log("created worker:", myWorker);
+// console.log("created worker:", myWorker);
 
 // 接收消息
 
