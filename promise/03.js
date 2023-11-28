@@ -20,7 +20,7 @@ let promise3 = new Promise((resolve, reject) => {
 
 Promise.race([promise1, promise2, promise3])
   .then((res) => {
-    console.log(res);
+    console.log(res); // promise1
   })
   .catch((e) => {
     console.error(e);

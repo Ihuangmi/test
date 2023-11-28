@@ -16,12 +16,27 @@ let promise2 = new Promise((resolve, reject) => {
 let promise3 = new Promise((resolve, reject) => {
   setTimeout(() => {
     reject("失败了");
-  }, 2000);
+  }, 1000);
 });
-Promise.all([promise1, promise2, promise3])
+
+let promise4 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject("又失败了");
+  }, 1000);
+});
+
+Promise.all([promise1, promise2])
+  .then((res) => {
+    console.log(res); // ['promise1', 'promise2']
+  })
+  .catch((e) => {
+    console.error(e);
+  });
+
+Promise.all([promise2, promise4, promise3])
   .then((res) => {
     console.log(res);
   })
   .catch((e) => {
-    console.error(e);
+    console.error(e); // 失败了
   });
