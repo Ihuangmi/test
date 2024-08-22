@@ -1,0 +1,97 @@
+<!-- 使用 canvas 实现裁剪图片 -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      canvas {
+        border: 1px solid #ccc;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="file" type="file" />
+    <canvas id="canvas"></canvas>
+    <button id="btn">裁剪</button>
+    <canvas id="canvasCropping"></canvas>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const file = document.getElementById("file");
+        const canvas = document.getElementById("canvas");
+        const canvasCtx = canvas.getContext("2d");
+        const canvasCropping = document.getElementById("canvasCropping");
+        const canvasCroppingCtx = canvasCropping.getContext("2d");
+
+        const image = new Image();
+
+        // 上传图片
+        file.addEventListener("change", (e) => {
+          const file = e.target.files[0];
+          image.src = URL.createObjectURL(file);
+          image.onload = () => {
+            // 将画布大小调整成照片大小
+            const { width, height } = image;
+            canvas.width = width;
+            canvas.height = height;
+            // 将图片绘制到画布中
+            canvasCtx.drawImage(image, 0, 0, width, height);
+
+            // getImageData 用于获取画布中的某个区域内容，裁剪出坐标为(0, 0)，width与height都为100的照片
+            const croppingImageData = canvasCtx.getImageData(0, 0, 100, 100);
+            console.log(
+              "🚀 ~ file.addEventListener ~ croppingImageData:",
+              croppingImageData
+            );
+            // 将 ImageData 对象绘制到画布中
+            canvasCroppingCtx.putImageData(croppingImageData, 0, 0);
+          };
+        });
+
+        // 点击裁剪
+        const btn = document.getElementById("btn");
+        btn.addEventListener("click", () => {
+          // currentDimention: top/right/bottom/left
+          if (currentDimention.length > 0) {
+            // 图片的宽度与高度
+            const { width: imageWidth, height: imageHeight } =
+              bgImage.getBoundingClientRect();
+            // 创建一个canvas用于裁剪操作，其实也可以将bgImage本身变成一个canvas，直接在上面操作就行
+            const canvas = document.createElement("canvas");
+            const canvasCtx = canvas.getContext("2d");
+            canvas.width = imageWidth;
+            canvas.height = imageHeight;
+            // 绘制照片
+            canvasCtx.drawImage(bgImage, 0, 0, imageWidth, imageHeight);
+            // 裁剪照片
+            const x = currentDimention[LEFT];
+            const y = currentDimention[TOP];
+            const width =
+              imageWidth - currentDimention[LEFT] - currentDimention[RIGHT];
+            const height =
+              imageHeight - currentDimention[TOP] - currentDimention[BOTTOM];
+            const croppingImageData = canvasCtx.getImageData(
+              x,
+              y,
+              width,
+              height
+            );
+            // 通过canvas展示裁剪的照片
+            const canvasCropping = document.getElementById("canvasCropping");
+            const canvasCroppingCtx = canvasCropping.getContext("2d");
+            canvasCropping.width = croppingImageData.width;
+            canvasCropping.height = croppingImageData.height;
+            // 清空一下画布
+            canvasCroppingCtx.clearRect(
+              0,
+              0,
+              croppingImageData.width,
+              croppingImageData.height
+            );
+            //将裁剪到的照片绘制到新的画布中预览
+            canvasCroppingCtx.putImageData(croppingImageData, 0, 0);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

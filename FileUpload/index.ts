@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import PQueue from 'p-queue';
-import { calculateFileHash } from './hashUtils'; // 假设你已经有了计算文件哈希的工具函数
+import { useState } from "react";
+import PQueue from "p-queue";
+import { calculateFileHash } from "./hashUtils"; // 假设你已经有了计算文件哈希的工具函数
 
 // 分片上传配置接口
 interface UploadChunkProps {
@@ -19,20 +19,20 @@ async function uploadChunkWithHash(
   index: number,
   chunkHash: string,
   // 这里的url是上传接口的地址，你需要根据你的后端API来配置
-  url: string = 'https://your-backend.com/upload-chunk'
+  url: string = "https://your-backend.com/upload-chunk"
 ): Promise<string | undefined> {
   const formData = new FormData();
-  formData.append('file', chunk);
-  formData.append('index', index.toString());
-  formData.append('hash', chunkHash);
+  formData.append("file", chunk);
+  formData.append("index", index.toString());
+  formData.append("hash", chunkHash);
 
   const response = await fetch(url, {
-    method: 'POST',
+    method: "POST",
     body: formData,
   });
 
   if (!response.ok) {
-    throw new Error('Chunk upload failed');
+    throw new Error("Chunk upload failed");
   }
 
   // 假设返回的是该分片在服务器上的标识符
@@ -40,7 +40,15 @@ async function uploadChunkWithHash(
 }
 
 // 分片上传hooks
-export function useChunkedUpload({ file, chunkSize = 1 * 1024 * 1024, maxConcurrent = 6, onProgress, onError, onSuccess, mergeChunksEndpoint }: UploadChunkProps) {
+export function useChunkedUpload({
+  file,
+  chunkSize = 1 * 1024 * 1024,
+  maxConcurrent = 6,
+  onProgress,
+  onError,
+  onSuccess,
+  mergeChunksEndpoint,
+}: UploadChunkProps) {
   const [progress, setProgress] = useState(0);
   const queue = new PQueue({ concurrency: maxConcurrent });
   const chunkHashes: Array<{ hash: string; id: string | undefined }> = [];
@@ -77,16 +85,19 @@ export function useChunkedUpload({ file, chunkSize = 1 * 1024 * 1024, maxConcurr
     await queue.onIdle(); // 等待所有任务完成
     // 所有分片上传完后，调用合并接口
     if (chunkHashes.length === chunkCount) {
-      const requestBody = { hashes: chunkHashes.map(item => item.hash), ids: chunkHashes.map(item => item.id) };
+      const requestBody = {
+        hashes: chunkHashes.map((item) => item.hash),
+        ids: chunkHashes.map((item) => item.id),
+      };
       await fetch(mergeChunksEndpoint, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(requestBody),
-      }).then(response => {
+      }).then((response) => {
         if (!response.ok) {
-          throw new Error('Merge chunks failed');
+          throw new Error("Merge chunks failed");
         }
         onSuccess && onSuccess();
       });

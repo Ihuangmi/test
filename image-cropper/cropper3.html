@@ -1,0 +1,105 @@
+<!-- 双击不规则裁剪 -->
+<!DOCTYPE html>
+<html>
+  <body>
+    <input id="file" type="file" />
+    <canvas id="canvas"></canvas>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const file = document.getElementById("file");
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        const width = 600;
+        const height = 400;
+        const image = new Image();
+        // 照片上传后绘制到canvas中展示
+        file.addEventListener("change", (e) => {
+          const target = e.target.files[0];
+          const imgURL = URL.createObjectURL(target);
+          image.src = imgURL;
+          image.onload = () => {
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(image, 0, 0, width, height);
+          };
+        });
+
+        // 裁剪路径集合
+        const pathMap = [];
+        // 裁剪中
+        let cropping = false;
+
+        // 监听canvas的鼠标按下事件
+        canvas.addEventListener("mousedown", (e) => {
+          cropping = true;
+          pathMap.push({
+            // 点和线的坐标不能一样
+            offsetXPoint: e.offsetX,
+            offsetYPoint: e.offsetY,
+            offsetY: e.offsetY,
+            offsetY: e.offsetY,
+          });
+          draw();
+        });
+        // 监听canvas的鼠标移动事件
+        canvas.addEventListener("mousemove", (e) => {
+          if (cropping) {
+            // 拿最后一个点，根据鼠标移动不断改变偏移量
+            pathMap[pathMap.length - 1].offsetX = e.offsetX;
+            pathMap[pathMap.length - 1].offsetY = e.offsetY;
+            // 标记是有效的点
+            pathMap[pathMap.length - 1].effectived = true;
+          }
+        });
+        // 监听canvas的鼠标双击事件
+        canvas.addEventListener("dblclick", (e) => {
+          cropping = false;
+          if (!pathMap[pathMap.length - 1].effectived) {
+            // 删除双击带来的多余点
+            pathMap.pop();
+          }
+          // 裁剪照片
+          setTimeout(async () => {
+            // 清空原画布
+            ctx.clearRect(0, 0, width, height);
+            // 开始绘制
+            ctx.beginPath();
+            pathMap.forEach((item, index) => {
+              if (index === 0) {
+                ctx.moveTo(item.offsetXPoint, item.offsetYPoint);
+              }
+              ctx.lineTo(item.offsetX, item.offsetY);
+            });
+            // 裁剪目标区域
+            ctx.clip();
+            // 在裁剪的区域内绘制图片
+            ctx.drawImage(image, 0, 0, width, height);
+          }, 200);
+        });
+
+        /** @name 绘制 **/
+        function draw() {
+          // 先清空画布
+          ctx.clearRect(0, 0, width, height);
+          // 绘制照片
+          ctx.drawImage(image, 0, 0, width, height);
+          // 开始绘制
+          ctx.beginPath();
+          // 设置画笔的颜色
+          ctx.strokeStyle = "yellow";
+          pathMap.forEach((item, index) => {
+            if (index === 0) {
+              // 端点位置
+              ctx.moveTo(item.offsetXPoint, item.offsetYPoint);
+            }
+            ctx.lineTo(item.offsetX, item.offsetY);
+          });
+          // 将路径绘制到画布上
+          ctx.stroke();
+          // 通过requestAnimationFrame去不断执行绘制
+          cropping && requestAnimationFrame(draw);
+        }
+      });
+    </script>
+  </body>
+</html>
